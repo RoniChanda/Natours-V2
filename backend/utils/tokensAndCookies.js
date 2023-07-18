@@ -6,7 +6,7 @@ const cookieOptions = (maxAge, httpOnly = true) => ({
   maxAge,
   httpOnly,
   sameSite: "lax",
-  // secure: process.env.NODE_ENV === "production",
+  secure: process.env.NODE_ENV === "production",
 });
 
 //* Create tokens **************************************************
