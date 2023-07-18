@@ -1,11 +1,10 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useLayoutEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 
 import Search from "../ui/Search";
 import Alert from "../ui/Alert";
-// import { useGetMeQuery } from "../../redux/apis/userApi";
 import { useLogoutMutation } from "../../redux/apis/authApi";
 import "./Header.css";
 
@@ -15,9 +14,12 @@ export default function Header() {
   const navigate = useNavigate();
   const [logout, { error: logoutError, data: logoutData }] =
     useLogoutMutation();
-  // const { isLoading: getMeLoading } = useGetMeQuery();
 
   console.log(cookies.logged_in);
+
+  useLayoutEffect(() => {
+    if (user) setCookie("user", true, { maxAge: 1 });
+  }, [user, setCookie]);
 
   useEffect(() => {
     if (logoutData?.status === "SUCCESS") navigate("/");
