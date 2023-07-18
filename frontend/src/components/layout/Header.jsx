@@ -1,17 +1,23 @@
 import { Fragment, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useCookies } from "react-cookie";
 
 import Search from "../ui/Search";
 import Alert from "../ui/Alert";
+// import { useGetMeQuery } from "../../redux/apis/userApi";
 import { useLogoutMutation } from "../../redux/apis/authApi";
 import "./Header.css";
 
 export default function Header() {
   const { user } = useSelector((state) => state.user);
+  const [cookies, setCookie] = useCookies(["logged_in"]);
   const navigate = useNavigate();
   const [logout, { error: logoutError, data: logoutData }] =
     useLogoutMutation();
+  // const { isLoading: getMeLoading } = useGetMeQuery();
+
+  console.log(cookies.logged_in);
 
   useEffect(() => {
     if (logoutData?.status === "SUCCESS") navigate("/");

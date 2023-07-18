@@ -2,9 +2,9 @@ const jwt = require("jsonwebtoken");
 
 //* Cookie options *************************************************
 
-const cookieOptions = (maxAge) => ({
+const cookieOptions = (maxAge, httpOnly = true) => ({
   maxAge,
-  httpOnly: true,
+  httpOnly,
   sameSite: process.env.NODE_ENV === "production" && "none",
   secure: process.env.NODE_ENV === "production",
 });
@@ -64,7 +64,7 @@ const createTokensAndCookies = async (user, res) => {
 const removeCookies = (res) => {
   res.cookie("access", "", cookieOptions(1));
   res.cookie("refresh", "", cookieOptions(1));
-  res.cookie("logged_in", "", cookieOptions(1));
+  res.cookie("logged_in", "", cookieOptions(1, false));
 };
 
 module.exports = {
