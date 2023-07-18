@@ -2,11 +2,11 @@ const jwt = require("jsonwebtoken");
 
 //* Cookie options *************************************************
 
-const cookieOptions = (maxAge, notSecure, httpOnly = true) => ({
+const cookieOptions = (maxAge, httpOnly = true) => ({
   maxAge,
   httpOnly,
-  sameSite: "none",
-  secure: notSecure ? false : process.env.NODE_ENV === "production",
+  sameSite: "lax",
+  // secure: process.env.NODE_ENV === "production",
 });
 
 //* Create tokens **************************************************
@@ -46,7 +46,7 @@ const sendCookies = (res, accessToken, refreshToken) => {
   res.cookie(
     "logged_in",
     true,
-    cookieOptions(process.env.REFRESH_COOKIE_EXPIRES_IN, true, false)
+    cookieOptions(process.env.REFRESH_COOKIE_EXPIRES_IN, false)
   );
 };
 
