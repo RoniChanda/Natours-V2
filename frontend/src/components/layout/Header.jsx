@@ -19,6 +19,8 @@ export default function Header() {
     skip: !cookies.logged_in,
   });
 
+  console.log(cookies.logged_in);
+
   useLayoutEffect(() => {
     if (user) {
       setCookie("user", true, { path: "/", maxAge: 1 });
