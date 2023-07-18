@@ -43,11 +43,11 @@ const sendCookies = (res, accessToken, refreshToken) => {
     refreshToken,
     cookieOptions(process.env.REFRESH_COOKIE_EXPIRES_IN)
   );
-  // res.cookie(
-  //   "logged_in",
-  //   true,
-  //   cookieOptions(process.env.REFRESH_COOKIE_EXPIRES_IN, false)
-  // );
+  res.cookie(
+    "logged_in",
+    true,
+    cookieOptions(process.env.REFRESH_COOKIE_EXPIRES_IN, false)
+  );
 };
 
 //* Create tokens and send Cookies *********************************
@@ -62,9 +62,9 @@ const createTokensAndCookies = async (user, res) => {
 //* remove cookies *************************************************
 
 const removeCookies = (res) => {
-  res.cookie("access", "", { maxAge: 10 });
-  res.cookie("refresh", "", { maxAge: 10 });
-  // res.cookie("logged_in", "", { maxAge: 1 });
+  res.cookie("access", "", cookieOptions(1));
+  res.cookie("refresh", "", cookieOptions(1));
+  res.cookie("logged_in", "", cookieOptions(1));
 };
 
 module.exports = {
