@@ -1,0 +1,39 @@
+.login-form {
+  margin: 0 auto;
+  max-width: 55rem;
+  background-color: #fff;
+  -webkit-box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
+  padding: 5rem 7rem;
+  border-radius: 5px;
+}
+
+.form__link {
+  font-size: 1.6rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.form__forgot {
+  font-size: 1.6rem;
+  text-align: end;
+  margin-top: 0.5rem;
+}
+
+.form__divider {
+  display: grid;
+  grid-template-columns: 1fr 12rem 1fr;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.line-horizontal {
+  height: 2px;
+  background-color: #ddd;
+}
+
+.content-between {
+  justify-self: center;
+  font-size: 1.6rem;
+}

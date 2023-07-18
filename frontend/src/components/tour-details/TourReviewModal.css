@@ -1,0 +1,13 @@
+.modal-outer-container {
+  overflow: hidden;
+}
+.modal-inner-container {
+  height: 40rem;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.outer-review-overflow {
+  margin-bottom: 1rem;
+  overflow-y: scroll;
+}

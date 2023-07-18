@@ -1,0 +1,53 @@
+.review_tour_image {
+  width: 14rem;
+  height: 9rem;
+  border-radius: 5px;
+  margin-bottom: 2.5rem;
+}
+
+.review_tour_details {
+  display: flex;
+  gap: 2rem;
+}
+
+.review_tour_description h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.review_tour_description p {
+  font-size: 1.4rem;
+}
+
+.review_text_container {
+  border: 2px solid #55c57a;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0;
+  background-color: #f2f2f2;
+}
+
+.review_text {
+  width: 100%;
+  height: 100%;
+  font-size: 1.6rem;
+  font-family: inherit;
+  color: inherit;
+  background-color: #f2f2f2;
+  padding: 1rem;
+  outline: none;
+  border: none;
+  resize: none;
+}
+
+.review_text::placeholder {
+  color: #555;
+}
+
+.review_tour_link {
+  text-decoration: none;
+  color: inherit;
+}
+.review_tour_link:hover {
+  color: #55c57a;
+}

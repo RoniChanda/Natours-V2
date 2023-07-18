@@ -1,0 +1,45 @@
+.paginate {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  background-color: inherit;
+  margin-top: 3rem;
+}
+
+.paginate button {
+  background-color: inherit;
+  color: #55c57a;
+  border: 2px solid #55c57a;
+  border-radius: 50%;
+  height: 4.5rem;
+  width: 4.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paginate button:hover {
+  background-color: #55c57a;
+  color: #fff;
+}
+
+.paginate button:hover svg {
+  fill: #fff;
+}
+
+.btn-hidden {
+  visibility: hidden;
+}
+
+.btn-disabled {
+  pointer-events: none;
+}
+
+.paginate .btn-active {
+  background-color: #55c57a;
+  color: #fff;
+}

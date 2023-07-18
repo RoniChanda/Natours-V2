@@ -1,0 +1,20 @@
+.useritem-email {
+  font-size: 1.3rem !important;
+}
+
+.useritem-status {
+  justify-self: flex-start;
+  align-self: center;
+  padding: 0.4rem 0.8rem;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.status-active {
+  background-color: #55c57a;
+}
+.status-inactive {
+  background-color: #eb4d4b;
+}

@@ -1,0 +1,8 @@
+.modal_message {
+  font-size: 1.6rem;
+  margin-top: -2rem;
+}
+
+.modal_message span {
+  font-weight: 700;
+}

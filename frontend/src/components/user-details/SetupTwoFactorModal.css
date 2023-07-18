@@ -1,0 +1,16 @@
+.two-factor-modal-container {
+  overflow: hidden;
+  border-radius: 5px;
+  padding: 0 !important;
+}
+
+.two-factor-modal {
+  height: 100%;
+  width: 100%;
+  padding: 3rem 5rem;
+  overflow-y: scroll;
+}
+
+.two-factor-secret {
+  font-weight: 700;
+}

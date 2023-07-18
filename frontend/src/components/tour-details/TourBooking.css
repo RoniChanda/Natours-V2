@@ -1,0 +1,113 @@
+.tour_booking {
+  max-width: 80rem;
+  max-height: 1rem;
+  margin: 0 auto;
+  margin-top: -1rem;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 0 0 2rem 2rem;
+  transition: all 0.5s;
+}
+.set-tour_booking {
+  max-height: 50rem;
+  padding: 6rem 0 3rem 0;
+  -webkit-box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.tour_dates {
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
+
+  opacity: 0;
+  transition: all 0.5s;
+}
+.set-tour_dates {
+  opacity: 1;
+}
+
+.dates_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.dates_container h3 {
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+.dates_container p {
+  font-size: 1.4rem;
+}
+
+.vertical-line {
+  width: 1px;
+  max-height: 50rem;
+  background-color: #e0e0e0;
+}
+
+.form_booking {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date_input {
+  position: relative;
+  height: 5rem;
+  width: 100%;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+}
+
+.date_input select {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: 1.25rem 1.75rem;
+  font-family: inherit;
+  font-size: 1.5rem;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.icon-down {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+}
+
+.booking-down {
+  right: 1rem;
+}
+
+.booking_tickets {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.6rem;
+  margin-top: 2rem;
+}
+.booking_tickets button {
+  border: none;
+  padding: 1rem;
+  width: 4rem;
+  font-size: 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #55c57a;
+  color: #fff;
+}
+
+.booking_tickets button:hover {
+  background-color: #2e864b;
+}

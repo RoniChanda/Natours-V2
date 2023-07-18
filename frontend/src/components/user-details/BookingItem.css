@@ -1,0 +1,37 @@
+.booking_status {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  text-transform: uppercase;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5rem;
+}
+
+.booking_pending {
+  background-color: #f08c00;
+}
+.booking_paid {
+  background-color: #55c57a;
+}
+.booking_canceled {
+  background-color: #eb4d4b;
+}
+.booking_refunded {
+  background-color: #339af0;
+}
+
+.booking-price {
+  font-weight: 700;
+  font-size: 1.5rem !important;
+}
+
+.booking-status-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1rem;
+  padding: 2rem;
+  border: 1px solid #55c57a;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+}

@@ -1,0 +1,15 @@
+.manage-booking-price {
+  font-weight: 700;
+  font-size: 1.4rem !important;
+
+  display: flex;
+  flex-direction: column;
+}
+.manage-booking-status {
+  align-self: flex-start;
+  font-size: 1rem !important;
+  color: #fff;
+  padding: 0.2rem 1rem;
+  text-transform: uppercase;
+  border-radius: 5px;
+}

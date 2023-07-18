@@ -1,0 +1,15 @@
+.tour-description-textarea {
+  font-size: 1.6rem;
+  font-family: inherit;
+  color: inherit;
+  background-color: #f2f2f2;
+  padding: 1rem;
+  outline: none;
+  border: none;
+  resize: none;
+  border-radius: 5px;
+}
+.tour-description-textarea::placeholder {
+  text-transform: uppercase;
+  color: #555;
+}

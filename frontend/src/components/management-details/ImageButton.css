@@ -1,0 +1,28 @@
+.image-button-container {
+  position: relative;
+  height: 7rem;
+  width: 10rem;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.image-button-container img {
+  height: 100%;
+  width: 100%;
+}
+
+.image-button-container button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  visibility: hidden;
+  cursor: pointer;
+  border: none;
+  outline: none;
+
+  background-color: #eb4d4b;
+}
+
+.image-button-container:hover button {
+  visibility: visible;
+}

@@ -1,0 +1,28 @@
+.leadguide-item {
+  display: flex;
+  gap: 1rem;
+  align-self: center;
+  align-items: center;
+}
+
+.leadguide-item img {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+}
+
+.leadguide-item h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.table-span-item {
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
+.price-discount {
+  font-size: 1.2rem;
+  font-weight: 300;
+  text-decoration: line-through;
+}

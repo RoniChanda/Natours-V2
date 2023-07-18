@@ -1,0 +1,46 @@
+.user-header {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.details_provider {
+  text-transform: capitalize;
+}
+
+.user-role {
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.details_container {
+  display: grid;
+  grid-template-columns: 15rem 25rem 1fr;
+  row-gap: 3rem;
+  align-items: center;
+  font-size: 1.8rem;
+  align-items: start;
+}
+
+.details_header,
+.details_content,
+.details_verify {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  font-weight: 400;
+}
+
+.details_verify {
+  gap: 3.5rem;
+}
+
+.details_header {
+  color: rgba(40, 180, 135, 0.85);
+}
+
+.details_verify {
+  margin-top: 6.2rem;
+}

@@ -1,0 +1,56 @@
+.review-modal-item {
+  display: flex;
+}
+
+.review-modal-item img {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+}
+
+.review-modal-user {
+  margin-left: 1rem;
+}
+.review-modal-user h3 {
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+}
+.review-modal-user p,
+.review-modal-booking p {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.review-modal-booking {
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+.review-modal-review {
+  margin: 1rem 0;
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-right: 2rem;
+}
+
+.liked_text {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.btn-likes-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-likes {
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  color: #777;
+  border: 1px solid #777;
+  border-radius: 1rem;
+  padding: 0.4rem 1rem;
+}

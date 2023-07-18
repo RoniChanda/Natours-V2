@@ -1,0 +1,17 @@
+.start-date-container {
+  display: grid;
+  grid-template-columns: 15rem 1fr 10rem;
+  column-gap: 2rem;
+  align-items: center;
+}
+
+.dates-preview {
+  grid-column: 2/3;
+  font-size: 1.6rem;
+}
+
+.date-item {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}

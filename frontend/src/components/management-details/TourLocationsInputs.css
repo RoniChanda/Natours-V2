@@ -1,0 +1,12 @@
+.location-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.location-item {
+  margin-top: 1.5rem;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

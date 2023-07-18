@@ -1,0 +1,10 @@
+.bd-container {
+  display: flex;
+  align-items: center;
+
+  font-size: 1.4rem;
+}
+
+.bd-container span {
+  font-weight: 700;
+}

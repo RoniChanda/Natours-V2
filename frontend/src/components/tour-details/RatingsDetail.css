@@ -1,0 +1,59 @@
+.bars-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 2rem;
+}
+
+.bar-inner {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+.bar-inner p {
+  font-size: 1.4rem;
+}
+
+.bar {
+  width: 30rem;
+  height: 1rem;
+  background-color: #ddd;
+
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.bar-color-5 {
+  background-color: #55c57a;
+}
+.bar-color-4 {
+  background-color: #aad457;
+}
+.bar-color-3 {
+  background-color: #ffe234;
+}
+.bar-color-2 {
+  background-color: #f59840;
+}
+.bar-color-1 {
+  background-color: #eb4d4b;
+}
+
+.average_details {
+  text-align: center;
+}
+.average_details h3 {
+  font-size: 1.6rem;
+}
+.average_details P {
+  font-size: 1.4rem;
+}
+
+.rating-filter {
+  font-size: 1.6rem;
+  align-self: flex-end;
+  margin: 2rem;
+  margin-left: auto;
+}

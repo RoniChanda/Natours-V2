@@ -1,0 +1,19 @@
+.other-guides {
+  grid-column: 1/-1;
+
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.other-guide-input {
+  width: 31.5rem;
+}
+
+.guide-item {
+  margin-top: 1.5rem;
+  display: flex;
+  font-size: 1.4rem;
+  align-items: center;
+  justify-content: space-between;
+}

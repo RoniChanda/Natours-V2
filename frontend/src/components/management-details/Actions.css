@@ -1,0 +1,40 @@
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+.actions button {
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-edit {
+  fill: #55c57a;
+}
+.icon-delete {
+  fill: #eb4d4b;
+}
+.actions button:hover .icon-edit,
+.actions button:hover .icon-delete {
+  fill: #fff;
+}
+
+.action-type {
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  padding: 0.2rem 0.4rem;
+  background-color: inherit;
+
+  font-size: 1rem;
+  visibility: hidden;
+}
+.actions button:hover .action-type {
+  visibility: visible;
+}

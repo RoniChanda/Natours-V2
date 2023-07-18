@@ -1,0 +1,8 @@
+.review_links {
+  text-align: center;
+  margin-left: auto;
+  width: 12rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

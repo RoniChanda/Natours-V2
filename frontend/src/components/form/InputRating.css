@@ -1,0 +1,10 @@
+.input-rating button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-top: 1.5rem;
+}
+.star {
+  font-size: 3.25rem;
+}

@@ -1,0 +1,30 @@
+.user-view {
+  background-color: #fff;
+  max-width: 120rem;
+  margin: 0 auto;
+  min-height: 100vh;
+  border-radius: 3px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.07);
+  box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.07);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.user-view__content {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding-bottom: 5rem;
+}
+.user-view__back-link {
+  height: 7rem;
+  padding: 2rem;
+  padding-left: 2rem;
+}
+.icon-back {
+  fill: #55c57a;
+}
+.icon-back:hover {
+  fill: #2e864b;
+}
