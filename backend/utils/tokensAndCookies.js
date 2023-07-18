@@ -62,8 +62,8 @@ const createTokensAndCookies = async (user, res) => {
 //* remove cookies *************************************************
 
 const removeCookies = (res) => {
-  res.cookie("access", "", { maxAge: 1 });
-  res.cookie("refresh", "", { maxAge: 1 });
+  res.cookie("access", "", { maxAge: 10 });
+  res.cookie("refresh", "", { maxAge: 10 });
   // res.cookie("logged_in", "", { maxAge: 1 });
 };
 
