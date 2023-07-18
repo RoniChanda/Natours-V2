@@ -1,26 +1,20 @@
-import { useCookies } from "react-cookie";
+import { useSelector } from "react-redux";
 import { Navigate, useOutlet, useSearchParams } from "react-router-dom";
+import { useGetMeQuery } from "../../redux/apis/userApi";
 
 export default function ProtectedRoute({ reverse, children }) {
   const outlet = useOutlet();
-  const [cookies] = useCookies(["logged_in"]);
+  const { isLoading } = useGetMeQuery();
+  const { user } = useSelector((state) => state.user);
   const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect");
 
   let content;
   if (reverse) {
-    content = cookies.logged_in ? (
-      <Navigate to={redirect || "/"} />
-    ) : (
-      children || outlet
-    );
+    content = user ? <Navigate to={redirect || "/"} /> : children || outlet;
   } else {
-    content = cookies.logged_in ? (
-      children || outlet
-    ) : (
-      <Navigate to="/auth/login" />
-    );
+    content = user ? children || outlet : <Navigate to="/auth/login" />;
   }
 
-  return content;
+  return !isLoading && content;
 }
