@@ -14,7 +14,10 @@ import Meta from "../../components/ui/Meta";
 export default function MyBookings() {
   const [page, setPage] = useState(1);
   const { user } = useSelector((state) => state.user);
-  const { isLoading, data, error } = useGetMyBookingsQuery({ page, limit: 6 });
+  const { isLoading, data, error } = useGetMyBookingsQuery(
+    { page, limit: 6 },
+    { refetchOnMountOrArgChange: true }
+  );
 
   let content;
   if (isLoading) {

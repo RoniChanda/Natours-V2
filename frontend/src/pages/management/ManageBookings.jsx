@@ -18,12 +18,15 @@ export default function ManageBookings() {
   const [filter, setFilter] = useState({ tour: "", status: "" });
   const [page, setPage] = useState(1);
 
-  const { isLoading, data, error } = useGetAllBookingsQuery({
-    sort,
-    ...filter,
-    page,
-    limit: 8,
-  });
+  const { isLoading, data, error } = useGetAllBookingsQuery(
+    {
+      sort,
+      ...filter,
+      page,
+      limit: 8,
+    },
+    { refetchOnMountOrArgChange: true }
+  );
 
   const inputHandler = (e) => {
     setFilter((prevState) => ({

@@ -18,13 +18,16 @@ export default function ManageTours() {
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState({ difficulty: "", rating: "0" });
   const [page, setPage] = useState(1);
-  const { isLoading, error, data } = useFetchAllToursQuery({
-    sort,
-    difficulty: filter.difficulty,
-    [`ratingsAverage[gte]`]: filter.rating,
-    page,
-    limit: 8,
-  });
+  const { isLoading, error, data } = useFetchAllToursQuery(
+    {
+      sort,
+      difficulty: filter.difficulty,
+      [`ratingsAverage[gte]`]: filter.rating,
+      page,
+      limit: 8,
+    },
+    { refetchOnMountOrArgChange: true }
+  );
 
   const inputHandler = (e) => {
     setFilter((prevState) => ({

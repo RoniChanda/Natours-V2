@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import InnerContainer from "../../components/ui/InnerContainer";
@@ -15,8 +15,8 @@ import {
 import TourGuidesInputs from "../../components/management-details/TourGuidesInputs";
 import Alert from "../../components/ui/Alert";
 import Loader from "../../components/ui/Loader";
-import "./CreateTour.css";
 import Meta from "../../components/ui/Meta";
+import "./CreateTour.css";
 
 export default function EditTour() {
   const [tourData, setTourData] = useState({
@@ -52,7 +52,7 @@ export default function EditTour() {
     { isLoading: updateLoading, error: updateError, data: updateData },
   ] = useUpdateTourMutation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (fetchData) {
       const tour = fetchData.data.tour;
       setTourData({

@@ -14,11 +14,14 @@ import Meta from "../../components/ui/Meta";
 export default function MyReviews() {
   const [page, setPage] = useState(1);
   const { user } = useSelector((state) => state.user);
-  const { isLoading, data, error } = useGetMyBookingsQuery({
-    page,
-    limit: 6,
-    fields: "-createdAt,-price,-receipt,-status,-tickets",
-  });
+  const { isLoading, data, error } = useGetMyBookingsQuery(
+    {
+      page,
+      limit: 6,
+      fields: "-createdAt,-price,-receipt,-tickets",
+    },
+    { refetchOnMountOrArgChange: true }
+  );
 
   let content;
   if (isLoading) {
@@ -27,7 +30,7 @@ export default function MyReviews() {
     content = <Alert type="error" msg={error.data?.message || error.error} />;
   } else {
     const bookings = data.data.bookings;
-
+    console.log(bookings);
     const tourStatus = bookings.map((el) => {
       const tourOver = getTourStatus(el);
       return tourOver ? "yes" : "no";

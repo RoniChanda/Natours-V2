@@ -20,8 +20,6 @@ import MyReviews from "./pages/user/MyReviews";
 import ManageUsers from "./pages/management/ManageUsers";
 import EditUser from "./pages/management/EditUser";
 import UserDetails from "./pages/management/UserDetails";
-import RestrictedRoute from "./components/layout/RestrictedRoute";
-import ManageRoute from "./components/layout/ManageRoute";
 import ManageReviews from "./pages/management/ManageReviews";
 import ManageBookings from "./pages/management/ManageBookings";
 import ManageTours from "./pages/management/ManageTours";
@@ -41,49 +39,104 @@ export default function App() {
         {
           // Auth routes
           path: "auth",
-          element: <ProtectedRoute reverse />,
           children: [
-            { path: "signup", element: <Signup /> },
-            { path: "login", element: <Login /> },
-            { path: "twoFactor/authApp", element: <ValidateTwoFactor /> },
+            {
+              path: "signup",
+              element: (
+                <ProtectedRoute reverse>
+                  <Signup />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "login",
+              element: (
+                <ProtectedRoute reverse>
+                  <Login />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "twoFactor/authApp",
+              element: (
+                <ProtectedRoute reverse>
+                  <ValidateTwoFactor />
+                </ProtectedRoute>
+              ),
+            },
             {
               path: "twoFactor/chooseMethod",
-              element: <ChooseTwoFactorMethod />,
+              element: (
+                <ProtectedRoute reverse>
+                  <ChooseTwoFactorMethod />
+                </ProtectedRoute>
+              ),
             },
-            { path: "forgotPassword", element: <ForgotPassword /> },
+            {
+              path: "forgotPassword",
+              element: (
+                <ProtectedRoute reverse>
+                  <ForgotPassword />
+                </ProtectedRoute>
+              ),
+            },
             {
               path: "passwordReset/:token?",
-              element: <ResetPassword />,
+              element: (
+                <ProtectedRoute reverse>
+                  <ResetPassword />
+                </ProtectedRoute>
+              ),
             },
           ],
         },
         {
           // Me routes
           path: "me",
-          element: <ProtectedRoute />,
           children: [
             {
               path: "profile",
               children: [
-                { index: true, element: <MyDetails /> },
+                {
+                  index: true,
+                  element: (
+                    <ProtectedRoute>
+                      <MyDetails />
+                    </ProtectedRoute>
+                  ),
+                },
                 {
                   path: "update",
                   element: (
-                    <RestrictedRoute type="provider" restrictTo={["local"]}>
+                    <ProtectedRoute type="provider" restrictTo={["local"]}>
                       <UpdateMyDetails />
-                    </RestrictedRoute>
+                    </ProtectedRoute>
                   ),
                 },
               ],
             },
-            { path: "security", element: <Security /> },
-            { path: "bookings", element: <MyBookings /> },
+            {
+              path: "security",
+              element: (
+                <ProtectedRoute>
+                  <Security />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "bookings",
+              element: (
+                <ProtectedRoute>
+                  <MyBookings />
+                </ProtectedRoute>
+              ),
+            },
             {
               path: "reviews",
               element: (
-                <RestrictedRoute type="role" restrictTo={["user"]}>
+                <ProtectedRoute type="role" restrictTo={["user"]}>
                   <MyReviews />
-                </RestrictedRoute>
+                </ProtectedRoute>
               ),
             },
           ],
@@ -94,31 +147,89 @@ export default function App() {
           children: [
             {
               path: "tours",
-              element: <ManageRoute restrictTo={["admin", "lead-guide"]} />,
               children: [
-                { index: true, element: <ManageTours /> },
-                { path: "create", element: <CreateTour /> },
-                { path: "edit/:id", element: <EditTour /> },
+                {
+                  index: true,
+                  element: (
+                    <ProtectedRoute
+                      type="role"
+                      restrictTo={["admin", "lead-guide"]}
+                    >
+                      <ManageTours />
+                    </ProtectedRoute>
+                  ),
+                },
+                {
+                  path: "create",
+                  element: (
+                    <ProtectedRoute
+                      type="role"
+                      restrictTo={["admin", "lead-guide"]}
+                    >
+                      <CreateTour />
+                    </ProtectedRoute>
+                  ),
+                },
+                {
+                  path: "edit/:id",
+                  element: (
+                    <ProtectedRoute
+                      type="role"
+                      restrictTo={["admin", "lead-guide"]}
+                    >
+                      <EditTour />
+                    </ProtectedRoute>
+                  ),
+                },
               ],
             },
             {
               path: "users",
-              element: <ManageRoute />,
               children: [
-                { index: true, element: <ManageUsers /> },
-                { path: "profile/:id", element: <UserDetails /> },
-                { path: "edit/:id", element: <EditUser /> },
+                {
+                  index: true,
+                  element: (
+                    <ProtectedRoute type="role" restrictTo={["admin"]}>
+                      <ManageUsers />
+                    </ProtectedRoute>
+                  ),
+                },
+                {
+                  path: "profile/:id",
+                  element: (
+                    <ProtectedRoute type="role" restrictTo={["admin"]}>
+                      <UserDetails />
+                    </ProtectedRoute>
+                  ),
+                },
+                {
+                  path: "edit/:id",
+                  element: (
+                    <ProtectedRoute type="role" restrictTo={["admin"]}>
+                      <EditUser />
+                    </ProtectedRoute>
+                  ),
+                },
               ],
             },
             {
               path: "reviews",
-              element: <ManageRoute />,
-              children: [{ index: true, element: <ManageReviews /> }],
+              element: (
+                <ProtectedRoute type="role" restrictTo={["admin"]}>
+                  <ManageReviews />
+                </ProtectedRoute>
+              ),
             },
             {
               path: "bookings",
-              element: <ManageRoute restrictTo={["admin", "lead-guide"]} />,
-              children: [{ index: true, element: <ManageBookings /> }],
+              element: (
+                <ProtectedRoute
+                  type="role"
+                  restrictTo={["admin", "lead-guide"]}
+                >
+                  <ManageBookings />
+                </ProtectedRoute>
+              ),
             },
           ],
         },

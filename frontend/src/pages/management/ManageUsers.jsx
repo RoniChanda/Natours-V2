@@ -18,12 +18,15 @@ export default function ManageUsers() {
   const [filter, setFilter] = useState({ provider: "", role: "", active: "" });
   const [page, setPage] = useState(1);
 
-  const { isLoading, data, error } = useGetAllUsersQuery({
-    sort,
-    ...filter,
-    page,
-    limit: 8,
-  });
+  const { isLoading, data, error } = useGetAllUsersQuery(
+    {
+      sort,
+      ...filter,
+      page,
+      limit: 8,
+    },
+    { refetchOnMountOrArgChange: true }
+  );
 
   const inputHandler = (e) => {
     setFilter((prevState) => ({

@@ -18,12 +18,15 @@ export default function ManageReviews() {
   const [filter, setFilter] = useState({ tour: "", rating: "" });
   const [page, setPage] = useState(1);
 
-  const { isLoading, error, data } = useGetAllReviewsQuery({
-    sort,
-    ...filter,
-    page,
-    limit: 8,
-  });
+  const { isLoading, error, data } = useGetAllReviewsQuery(
+    {
+      sort,
+      ...filter,
+      page,
+      limit: 8,
+    },
+    { refetchOnMountOrArgChange: true }
+  );
 
   const inputHandler = (e) => {
     setFilter((prevState) => ({

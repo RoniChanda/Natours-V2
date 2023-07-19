@@ -1,5 +1,6 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { Mutex } from "async-mutex";
+
 import { isLoggedOut } from "./slices/userSlice";
 
 // create a new mutex
