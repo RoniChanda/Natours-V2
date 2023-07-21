@@ -26,7 +26,7 @@ export default function TourDetails() {
     if (error) dispatch(setAlert({ type: "error", msg: error }));
 
     if (searchParams.get("status") === "success" && user)
-      dispatch(setAlert({ type: "success", msg: `Welcome, ${user.name}` }));
+      dispatch(setAlert({ type: "success", msg: `Welcome, ${user.name}!` }));
   }, [error, dispatch, searchParams, user]);
 
   let content;

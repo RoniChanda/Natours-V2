@@ -44,7 +44,7 @@ export default function Overview() {
     if (error) dispatch(setAlert({ type: "error", msg: error }));
 
     if (searchParams.get("status") === "success" && user)
-      dispatch(setAlert({ type: "success", msg: `Welcome, ${user.name}` }));
+      dispatch(setAlert({ type: "success", msg: `Welcome, ${user.name}!` }));
   }, [error, dispatch, searchParams, user]);
 
   let content;
@@ -98,6 +98,7 @@ export default function Overview() {
             pages={Math.ceil(data.total / 6)}
             filter={filter}
             sort={sort}
+            keyword={keyword}
           />
         </div>
         <Footer />

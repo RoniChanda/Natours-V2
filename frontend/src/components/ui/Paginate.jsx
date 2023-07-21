@@ -9,12 +9,13 @@ export default function Paginate({
   setCurrentBtn,
   filter,
   sort,
+  keyword,
 }) {
   const [arrCurrentBtns, setArrCurrentBtns] = useState([]);
 
   useEffect(() => {
-    if (filter || sort) setCurrentBtn(1);
-  }, [filter, sort, setCurrentBtn]);
+    if (filter || sort || keyword) setCurrentBtn(1);
+  }, [filter, sort, keyword, setCurrentBtn]);
 
   // Page number showing functionality
   useEffect(() => {
