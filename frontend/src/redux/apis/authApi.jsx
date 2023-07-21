@@ -40,7 +40,7 @@ export const authApi = createApi({
         logError(obj, async () => {
           const { data } = await obj.queryFulfilled;
           obj.dispatch(bookingApi.util.invalidateTags(["myBookings"]));
-          obj.dispatch(tourApi.util.invalidateTags(["tourReview"]));
+          obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
           if (data.data?.user) obj.dispatch(getUser(data.data.user));
         });
       },
@@ -57,8 +57,8 @@ export const authApi = createApi({
       async onQueryStarted(args, obj) {
         logError(obj, async () => {
           await obj.queryFulfilled;
+          obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
           obj.dispatch(isLoggedOut());
-          obj.dispatch(tourApi.util.invalidateTags(["tourReview"]));
         });
       },
     }),
