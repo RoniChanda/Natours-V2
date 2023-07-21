@@ -20,8 +20,14 @@ export default function ReviewModalItem({ reviewObj, tourStartDate }) {
   useEffect(() => {
     const feedback = reviewObj.userFeedback?.[0]?.feedback;
 
-    if (feedback === "like") setLike(true);
-    if (feedback === "unlike") setUnlike(true);
+    if (feedback === "like") {
+      setLike(true);
+    } else if (feedback === "unlike") {
+      setUnlike(true);
+    } else {
+      setLike(false);
+      setUnlike(false);
+    }
   }, [reviewObj]);
 
   useEffect(() => {

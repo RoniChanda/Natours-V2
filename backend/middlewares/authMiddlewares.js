@@ -58,7 +58,7 @@ exports.restrictTo =
   (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       return next(
-        new AppError("You don't have permission to perform this action", 403)
+        new AppError("You don't have permission to perform this action!", 403)
       );
     }
 
@@ -71,7 +71,7 @@ exports.verified = (req, res, next) => {
   if (!req.user.emailVerified || (req.user.phone && !req.user.phoneVerified)) {
     return next(
       new AppError(
-        "Please verify your both email and phone to perform this action",
+        "Please verify your both email and phone to perform this action!",
         403
       )
     );
