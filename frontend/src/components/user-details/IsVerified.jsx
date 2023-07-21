@@ -34,6 +34,7 @@ export default function IsVerified({ checkVerification, medium }) {
         </svg>
       ) : (
         <button
+          type="button"
           className="btn-secondary"
           onClick={() => sendVerificationCode({ medium })}
         >

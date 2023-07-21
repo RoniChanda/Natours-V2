@@ -84,6 +84,7 @@ export default function TourLocationsInputs({ locations, setLocations }) {
             {el.coordinates[0]}, {el.coordinates[1]})
           </p>
           <button
+            type="button"
             className="btn-secondary secondary--red"
             onClick={deleteLocationHandler.bind(null, index)}
           >

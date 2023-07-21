@@ -5,6 +5,7 @@ export default function Actions({ onDelete, onEdit, onCancel }) {
     <div className="actions">
       {onDelete && (
         <button
+          type="button"
           className="btn-secondary btn--xs secondary--red"
           onClick={onDelete}
         >
@@ -16,7 +17,11 @@ export default function Actions({ onDelete, onEdit, onCancel }) {
       )}
 
       {onEdit && (
-        <button className="btn-secondary btn--xs" onClick={onEdit}>
+        <button
+          type="button"
+          className="btn-secondary btn--xs"
+          onClick={onEdit}
+        >
           <svg className="icon-edit icon-small">
             <use xlinkHref="/img/icons.svg#icon-edit"></use>
           </svg>
@@ -26,6 +31,7 @@ export default function Actions({ onDelete, onEdit, onCancel }) {
 
       {onCancel && (
         <button
+          type="button"
           className="btn-secondary btn--xs secondary--red"
           onClick={onCancel}
         >

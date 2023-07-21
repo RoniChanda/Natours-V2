@@ -93,12 +93,12 @@ export default function ReviewModalItem({ reviewObj, tourStartDate }) {
         <Loader />
       ) : (
         <div className="btn-likes-container">
-          <button className="btn-likes" onClick={likeHandler}>
+          <button type="button" className="btn-likes" onClick={likeHandler}>
             <svg className={`icon-small icon-${like ? "green" : "dark"}`}>
               <use xlinkHref="/img/icons.svg#icon-thumbs-up"></use>
             </svg>
           </button>
-          <button className="btn-likes" onClick={unlikeHandler}>
+          <button type="button" className="btn-likes" onClick={unlikeHandler}>
             <svg className={`icon-small icon-${unlike ? "red" : "dark"}`}>
               <use xlinkHref="/img/icons.svg#icon-thumbs-down"></use>
             </svg>

@@ -1,5 +1,9 @@
-import { Navigate, useLocation, useSearchParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {
+  Navigate,
+  useLocation,
+  useOutlet,
+  useSearchParams,
+} from "react-router-dom";
 
 import { useGetMeQuery } from "../../redux/apis/userApi";
 import Error from "./Error";
@@ -11,36 +15,32 @@ export default function ProtectedRoute({
   restrictTo,
   children,
 }) {
-  const { user } = useSelector((state) => state.user);
-  const [searchParams] = useSearchParams();
+  const outlet = useOutlet();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const redirect = searchParams.get("redirect");
-  const { isLoading } = useGetMeQuery();
+  const { isLoading, data } = useGetMeQuery();
 
-  if (isLoading) return <Loader />;
+  if (isLoading) {
+    return <Loader />;
+  } else if (data) {
+    const user = data.data.user;
 
-  if (reverse) {
-    return user ? (
-      <Navigate to={redirect || "/"} state={location} replace />
-    ) : (
-      children
-    );
-  }
-
-  if (type && user) {
-    if (
-      (type === "provider" && restrictTo.includes(user.provider)) ||
-      (type === "role" && restrictTo.includes(user.role))
+    if (reverse) {
+      return <Navigate to={redirect || "/"} state={location} replace />;
+    } else if (
+      (type === "provider" && !restrictTo.includes(user.provider)) ||
+      (type === "role" && !restrictTo.includes(user.role))
     ) {
-      return children;
-    } else {
       return <Error customError={{ status: 403 }} />;
+    } else {
+      return children || outlet;
     }
-  } else if (!type) {
-    return user ? (
-      children
-    ) : (
-      <Navigate to="/auth/login" state={location} replace />
-    );
+  } else {
+    if (reverse) {
+      return outlet;
+    } else {
+      return <Navigate to="/auth/login" state={location} replace />;
+    }
   }
 }

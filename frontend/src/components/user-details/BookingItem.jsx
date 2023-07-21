@@ -94,6 +94,7 @@ export default function BookingItem({ booking }) {
 
             {startDate - Date.now() > 0 && (
               <button
+              type="button"
                 className="btn-secondary secondary--red"
                 onClick={() => setModal(true)}
               >

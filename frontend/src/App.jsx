@@ -1,8 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import UnprotectedRoute from "./components/layout/UnprotectedRoute";
 import ProtectedRoute from "./components/layout/ProtectedRoute";
 import RootLayout from "./components/layout/RootLayout";
 import Error from "./components/layout/Error";
+
 import Overview from "./pages/tour/Overview";
 import TourDetails from "./pages/tour/TourDetails";
 import Signup from "./pages/user/Signup";
@@ -33,60 +35,58 @@ export default function App() {
       element: <RootLayout />,
       errorElement: <Error />,
       children: [
-        { index: true, element: <Overview /> },
-        { path: "tours/:id", element: <TourDetails /> },
-        { path: "verifyCode", element: <CodeVerification /> },
+        {
+          index: true,
+          element: (
+            <UnprotectedRoute>
+              <Overview />
+            </UnprotectedRoute>
+          ),
+        },
+        {
+          path: "tours/:id",
+          element: (
+            <UnprotectedRoute>
+              <TourDetails />
+            </UnprotectedRoute>
+          ),
+        },
+        {
+          path: "verifyCode",
+          element: (
+            <UnprotectedRoute>
+              <CodeVerification />
+            </UnprotectedRoute>
+          ),
+        },
         {
           // Auth routes
           path: "auth",
+          element: <ProtectedRoute reverse />,
           children: [
             {
               path: "signup",
-              element: (
-                <ProtectedRoute reverse>
-                  <Signup />
-                </ProtectedRoute>
-              ),
+              element: <Signup />,
             },
             {
               path: "login",
-              element: (
-                <ProtectedRoute reverse>
-                  <Login />
-                </ProtectedRoute>
-              ),
+              element: <Login />,
             },
             {
               path: "twoFactor/authApp",
-              element: (
-                <ProtectedRoute reverse>
-                  <ValidateTwoFactor />
-                </ProtectedRoute>
-              ),
+              element: <ValidateTwoFactor />,
             },
             {
               path: "twoFactor/chooseMethod",
-              element: (
-                <ProtectedRoute reverse>
-                  <ChooseTwoFactorMethod />
-                </ProtectedRoute>
-              ),
+              element: <ChooseTwoFactorMethod />,
             },
             {
               path: "forgotPassword",
-              element: (
-                <ProtectedRoute reverse>
-                  <ForgotPassword />
-                </ProtectedRoute>
-              ),
+              element: <ForgotPassword />,
             },
             {
               path: "passwordReset/:token?",
-              element: (
-                <ProtectedRoute reverse>
-                  <ResetPassword />
-                </ProtectedRoute>
-              ),
+              element: <ResetPassword />,
             },
           ],
         },
@@ -147,68 +147,42 @@ export default function App() {
           children: [
             {
               path: "tours",
+              element: (
+                <ProtectedRoute
+                  type="role"
+                  restrictTo={["admin", "lead-guide"]}
+                />
+              ),
               children: [
                 {
                   index: true,
-                  element: (
-                    <ProtectedRoute
-                      type="role"
-                      restrictTo={["admin", "lead-guide"]}
-                    >
-                      <ManageTours />
-                    </ProtectedRoute>
-                  ),
+                  element: <ManageTours />,
                 },
                 {
                   path: "create",
-                  element: (
-                    <ProtectedRoute
-                      type="role"
-                      restrictTo={["admin", "lead-guide"]}
-                    >
-                      <CreateTour />
-                    </ProtectedRoute>
-                  ),
+                  element: <CreateTour />,
                 },
                 {
                   path: "edit/:id",
-                  element: (
-                    <ProtectedRoute
-                      type="role"
-                      restrictTo={["admin", "lead-guide"]}
-                    >
-                      <EditTour />
-                    </ProtectedRoute>
-                  ),
+                  element: <EditTour />,
                 },
               ],
             },
             {
               path: "users",
+              element: <ProtectedRoute type="role" restrictTo={["admin"]} />,
               children: [
                 {
                   index: true,
-                  element: (
-                    <ProtectedRoute type="role" restrictTo={["admin"]}>
-                      <ManageUsers />
-                    </ProtectedRoute>
-                  ),
+                  element: <ManageUsers />,
                 },
                 {
                   path: "profile/:id",
-                  element: (
-                    <ProtectedRoute type="role" restrictTo={["admin"]}>
-                      <UserDetails />
-                    </ProtectedRoute>
-                  ),
+                  element: <UserDetails />,
                 },
                 {
                   path: "edit/:id",
-                  element: (
-                    <ProtectedRoute type="role" restrictTo={["admin"]}>
-                      <EditUser />
-                    </ProtectedRoute>
-                  ),
+                  element: <EditUser />,
                 },
               ],
             },

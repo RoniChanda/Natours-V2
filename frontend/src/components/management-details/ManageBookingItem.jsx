@@ -75,6 +75,7 @@ export default function ManageBookingItem({ booking }) {
         {canCancel && (
           <div className="actions">
             <button
+              type="button"
               className="btn-secondary btn--xs secondary--red"
               onClick={() => setModal(true)}
             >

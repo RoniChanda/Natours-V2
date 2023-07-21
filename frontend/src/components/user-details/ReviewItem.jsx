@@ -77,6 +77,7 @@ export default function ReviewItem({ booking }) {
 
           {review && (
             <button
+              type="button"
               className="btn-secondary secondary--red"
               onClick={() => deleteReview(booking.review[0]._id)}
             >

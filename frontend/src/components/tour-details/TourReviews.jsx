@@ -21,6 +21,7 @@ export default function TourReviews({ tour }) {
           </div>
           <div className="center">
             <button
+              type="button"
               className="btn btn--medium btn--white"
               onClick={() => setModal(true)}
             >

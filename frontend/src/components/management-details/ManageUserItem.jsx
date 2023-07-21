@@ -64,6 +64,7 @@ export default function ManageUserItem({ user }) {
 
         <div className="actions">
           <button
+            type="button"
             className="btn-secondary btn--xs secondary--red"
             onClick={() => setModal(true)}
           >
@@ -75,6 +76,7 @@ export default function ManageUserItem({ user }) {
 
           {user.provider === "local" && (
             <button
+              type="button"
               className="btn-secondary btn--xs"
               onClick={() => navigate(`/manage/users/edit/${user._id}`)}
             >
