@@ -57,8 +57,8 @@ export const authApi = createApi({
       async onQueryStarted(args, obj) {
         logError(obj, async () => {
           await obj.queryFulfilled;
-          obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
           obj.dispatch(isLoggedOut());
+          obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
         });
       },
     }),

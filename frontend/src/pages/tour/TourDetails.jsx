@@ -1,6 +1,6 @@
 import { Fragment, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useSearchParams } from "react-router-dom";
 
 import { useFetchTourDetailsQuery } from "../../redux/apis/tourApi";
 import TourHeader from "../../components/tour-details/TourHeader";
@@ -16,13 +16,18 @@ import Meta from "../../components/ui/Meta";
 import { setAlert } from "../../redux/slices/userSlice";
 
 export default function TourDetails() {
+  const { user } = useSelector((state) => state.user);
   const { id } = useParams();
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
   const { isLoading, data, error } = useFetchTourDetailsQuery(id);
 
   useEffect(() => {
     if (error) dispatch(setAlert({ type: "error", msg: error }));
-  }, [error, dispatch]);
+
+    if (searchParams.get("status") === "success" && user)
+      dispatch(setAlert({ type: "success", msg: `Welcome, ${user.name}` }));
+  }, [error, dispatch, searchParams, user]);
 
   let content;
   if (isLoading) {

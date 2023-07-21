@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
 import TourCard from "../../components/tour-details/TourCard";
@@ -19,6 +19,7 @@ export default function Overview() {
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState({ difficulty: "", rating: "0" });
   const [page, setPage] = useState(1);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get("search") || "";
@@ -41,7 +42,10 @@ export default function Overview() {
 
   useEffect(() => {
     if (error) dispatch(setAlert({ type: "error", msg: error }));
-  }, [error, dispatch]);
+
+    if (searchParams.get("status") === "success" && user)
+      dispatch(setAlert({ type: "success", msg: `Welcome, ${user.name}` }));
+  }, [error, dispatch, searchParams, user]);
 
   let content;
   if (isLoading) {

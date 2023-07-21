@@ -50,7 +50,7 @@ exports.sendTokensAndCookies = async (
       },
     });
   } else {
-    res.redirect(`${process.env.FRONTEND_URL}${redirectUrl}`);
+    res.redirect(`${process.env.FRONTEND_URL}${redirectUrl}?status=success`);
   }
 };
 
