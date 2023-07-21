@@ -1,28 +1,30 @@
 import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import Modal from "../ui/Modal";
 import { useDeleteUserByIdMutation } from "../../redux/apis/userApi";
-import Alert from "../ui/Alert";
+import { setAlert } from "../../redux/slices/userSlice";
 import "./ManageUserItem.css";
 
 export default function ManageUserItem({ user }) {
   const [modal, setModal] = useState(false);
   const navigate = useNavigate();
-  const [deleteUser, { isLoading, error, data }] = useDeleteUserByIdMutation();
+  const dispatch = useDispatch();
+  const [deleteUser, { isLoading, error, isSuccess }] =
+    useDeleteUserByIdMutation();
 
   useEffect(() => {
-    if (data?.status === "SUCCESS") setModal(false);
-  }, [data]);
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
 
-  const editHandler = () => {
-    navigate(`/manage/users/edit/${user._id}`);
-  };
+    if (isSuccess) {
+      dispatch(setAlert({ type: "success", msg: "User was deleted." }));
+      setModal(false);
+    }
+  }, [isSuccess, error, dispatch]);
 
   return (
     <Fragment>
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
-
       {modal && (
         <Modal
           heading="Delete User"
@@ -72,7 +74,10 @@ export default function ManageUserItem({ user }) {
           </button>
 
           {user.provider === "local" && (
-            <button className="btn-secondary btn--xs" onClick={editHandler}>
+            <button
+              className="btn-secondary btn--xs"
+              onClick={() => navigate(`/manage/users/edit/${user._id}`)}
+            >
               <svg className="icon-edit icon-small">
                 <use xlinkHref="/img/icons.svg#icon-edit"></use>
               </svg>

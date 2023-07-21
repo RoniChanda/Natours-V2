@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { useUpdatePasswordMutation } from "../../redux/apis/userApi";
-import Alert from "../ui/Alert";
 import Input from "../form/Input";
 import { useLogoutMutation } from "../../redux/apis/authApi";
+import { setAlert } from "../../redux/slices/userSlice";
 import "../shared/DetailsForm.css";
 
 export default function PasswordForm() {
@@ -14,6 +15,7 @@ export default function PasswordForm() {
     passwordConfirm: "",
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [updatePassword, { isLoading, data: updateData, error: updateError }] =
     useUpdatePasswordMutation();
   const [logout, { data: logoutData, error: logoutError }] =
@@ -23,9 +25,20 @@ export default function PasswordForm() {
     if (updateData?.status === "SUCCESS") logout();
   }, [updateData, logout]);
 
+  const error = updateError || logoutError;
   useEffect(() => {
-    if (logoutData?.status === "SUCCESS") navigate("/");
-  }, [navigate, logoutData]);
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (logoutData?.status === "SUCCESS") {
+      dispatch(
+        setAlert({
+          type: "success",
+          msg: "Your password was updated. Please login again.",
+        })
+      );
+      navigate("/");
+    }
+  }, [navigate, logoutData, error, dispatch]);
 
   const inputHandler = (e) => {
     setFormData((prevState) => ({
@@ -39,18 +52,8 @@ export default function PasswordForm() {
     updatePassword(formData);
   };
 
-  const error = updateError || logoutError;
-
-  let alert;
-  if (error) {
-    alert = <Alert type="error" msg={error.data?.message || error.error} />;
-  } else if (updateData?.status === "SUCCESS") {
-    alert = <Alert type="success" msg="Password updated successfully!" />;
-  }
-
   return (
     <form onSubmit={submitHandler}>
-      {alert}
       <Input
         required
         name="currentPassword"

@@ -12,8 +12,8 @@ export default function TourCta({
   startDates,
   maxGroupSize,
 }) {
-  const { user } = useSelector((state) => state.user);
   const [booking, setBooking] = useState(false);
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (user) setBooking(true);

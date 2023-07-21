@@ -22,7 +22,8 @@ export const authApi = createApi({
       async onQueryStarted(args, obj) {
         logError(obj, async () => {
           const { data } = await obj.queryFulfilled;
-          obj.dispatch(getUser(data.data.user));
+          obj.dispatch(bookingApi.util.invalidateTags(["myBookings"]));
+          if (data.data?.user) obj.dispatch(getUser(data.data.user));
         });
       },
     }),
@@ -38,7 +39,7 @@ export const authApi = createApi({
       async onQueryStarted(args, obj) {
         logError(obj, async () => {
           const { data } = await obj.queryFulfilled;
-          obj.dispatch(bookingApi.util.invalidateTags(["userBookings"]));
+          obj.dispatch(bookingApi.util.invalidateTags(["myBookings"]));
           obj.dispatch(tourApi.util.invalidateTags(["tourReview"]));
           if (data.data?.user) obj.dispatch(getUser(data.data.user));
         });
@@ -150,6 +151,7 @@ export const authApi = createApi({
       async onQueryStarted(args, obj) {
         logError(obj, async () => {
           const { data } = await obj.queryFulfilled;
+          obj.dispatch(bookingApi.util.invalidateTags(["myBookings"]));
           if (data.data?.user) obj.dispatch(getUser(data.data.user));
         });
       },
@@ -175,6 +177,7 @@ export const authApi = createApi({
       async onQueryStarted(args, obj) {
         logError(obj, async () => {
           const { data } = await obj.queryFulfilled;
+          obj.dispatch(bookingApi.util.invalidateTags(["myBookings"]));
           if (data.data?.user) obj.dispatch(getUser(data.data.user));
         });
       },

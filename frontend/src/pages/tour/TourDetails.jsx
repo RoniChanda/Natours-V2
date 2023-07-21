@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { useFetchTourDetailsQuery } from "../../redux/apis/tourApi";
@@ -10,20 +11,23 @@ import TourCta from "../../components/tour-details/TourCta";
 import TourReviews from "../../components/tour-details/TourReviews";
 import TourMap from "../../components/tour-details/TourMap";
 import Loader from "../../components/ui/Loader";
-import Alert from "../../components/ui/Alert";
 import Container from "../../components/ui/Container";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
 
 export default function TourDetails() {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const { isLoading, data, error } = useFetchTourDetailsQuery(id);
+
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+  }, [error, dispatch]);
 
   let content;
   if (isLoading) {
     content = <Loader />;
-  } else if (error) {
-    content = <Alert type="error" msg={error.data?.message || error.error} />;
-  } else {
+  } else if (data) {
     const tour = data.data.tour;
 
     content = (

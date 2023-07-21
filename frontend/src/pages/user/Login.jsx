@@ -1,31 +1,44 @@
 import { Fragment, useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-import Alert from "../../components/ui/Alert";
 import Container from "../../components/ui/Container";
 import InnerContainer from "../../components/ui/InnerContainer";
 import Input from "../../components/form/Input";
 import { useLoginMutation } from "../../redux/apis/authApi";
 import ButtonAuth from "../../components/form/ButtonAuth";
-import "./Login.css";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
+import "./Login.css";
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [local, setLocal] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const [login, { isLoading, data, error }] = useLoginMutation();
 
   const redirect = searchParams.get("redirect") || "/";
 
   useEffect(() => {
-    if (data?.status === "SUCCESS") navigate(redirect);
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (data?.status === "SUCCESS") {
+      dispatch(
+        setAlert({
+          type: "success",
+          msg: `Welcome back, ${data?.data?.user.name}!`,
+        })
+      );
+      navigate(redirect);
+    }
+
     if (data?.userId)
       navigate(
         `/auth/twoFactor/authApp?redirect=${redirect}&id=${data.userId}`
       );
-  }, [data, navigate, redirect]);
+  }, [data, navigate, redirect, error, dispatch]);
 
   const inputHandler = (e) => {
     setFormData((prevState) => ({
@@ -45,7 +58,7 @@ export default function Login() {
         title="Login | Natours"
         description="Login to Natours with local and third-party providers"
       />
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
+      {/* {error && <Alert type="error" msg={error.data?.message || error.error} />} */}
       <InnerContainer className="login-form" heading="Log into your account">
         <form onSubmit={submitHandler}>
           <Input

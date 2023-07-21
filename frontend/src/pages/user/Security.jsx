@@ -1,9 +1,9 @@
+import { Fragment } from "react";
 import { useSelector } from "react-redux";
 
 import EnableTwoFactor from "../../components/user-details/EnableTwoFactor";
 import DeleteAccount from "../../components/user-details/DeleteAccount";
 import UserContainer from "../../components/ui/UserContainer";
-import { Fragment } from "react";
 import Meta from "../../components/ui/Meta";
 
 export default function Security() {
@@ -18,7 +18,8 @@ export default function Security() {
         />
         {user.provider === "local" && (
           <Fragment>
-            <EnableTwoFactor /> <div className="line">&nbsp;</div>
+            <EnableTwoFactor />
+            <div className="line">&nbsp;</div>
           </Fragment>
         )}
 

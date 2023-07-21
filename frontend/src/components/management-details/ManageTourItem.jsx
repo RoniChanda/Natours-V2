@@ -1,31 +1,32 @@
 import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { convertDate } from "../../utils/date";
 import Actions from "./Actions";
 import Modal from "../ui/Modal";
 import { useDeleteTourMutation } from "../../redux/apis/tourApi";
-import Alert from "../ui/Alert";
+import { setAlert } from "../../redux/slices/userSlice";
 import "./ManageTourItem.css";
 
 export default function ManageTourItem({ tour }) {
   const [modal, setModal] = useState(false);
   const navigate = useNavigate();
-  const [deleteTour, { isLoading, error, data }] = useDeleteTourMutation();
+  const dispatch = useDispatch();
+  const [deleteTour, { isLoading, error, isSuccess }] = useDeleteTourMutation();
   const leadGuide = tour.guides.find((el) => el.role === "lead-guide");
 
   useEffect(() => {
-    if (data?.status === "SUCCESS") setModal(false);
-  }, [data]);
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
 
-  const editHandler = () => {
-    navigate(`/manage/tours/edit/${tour._id}`);
-  };
+    if (isSuccess) {
+      dispatch(setAlert({ type: "success", msg: "Tour was deleted." }));
+      setModal(false);
+    }
+  }, [isSuccess, error, dispatch]);
 
   return (
     <Fragment>
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
-
       {modal && (
         <Modal
           heading="Delete Tour"
@@ -70,7 +71,10 @@ export default function ManageTourItem({ tour }) {
           <span className="table-span-item">(per person)</span>
         </p>
 
-        <Actions onEdit={editHandler} onDelete={() => setModal(true)} />
+        <Actions
+          onEdit={() => navigate(`/manage/tours/edit/${tour._id}`)}
+          onDelete={() => setModal(true)}
+        />
       </div>
     </Fragment>
   );

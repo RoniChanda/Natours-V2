@@ -1,30 +1,31 @@
 import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { convertDate } from "../../utils/date";
 import Modal from "../ui/Modal";
 import { useCancelBookingByIdMutation } from "../../redux/apis/bookingApi";
-import Alert from "../ui/Alert";
+import { setAlert } from "../../redux/slices/userSlice";
 import "./ManageBookingItem.css";
 
 export default function ManageBookingItem({ booking }) {
   const [modal, setModal] = useState(false);
+  const dispatch = useDispatch();
   const [cancelBooking, { isLoading, error, data }] =
     useCancelBookingByIdMutation();
   const { user, tour } = booking;
   const canCancel = booking.status === "pending" || booking.status === "paid";
 
   useEffect(() => {
-    if (data?.status === "SUCCESS") setModal(false);
-  }, [data]);
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
 
-  const cancelBookingHandler = () => {
-    cancelBooking({ userId: user._id, bookingId: booking._id });
-  };
+    if (data?.status === "SUCCESS") {
+      dispatch(setAlert({ type: "success", msg: "Booking was canceled." }));
+      setModal(false);
+    }
+  }, [data, error, dispatch]);
 
   return (
     <Fragment>
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
-
       {modal && (
         <Modal
           heading="Cancel Booking"
@@ -34,7 +35,9 @@ export default function ManageBookingItem({ booking }) {
               <span>${booking.price}</span>?
             </>
           }
-          onProceed={cancelBookingHandler}
+          onProceed={() =>
+            cancelBooking({ userId: user._id, bookingId: booking._id })
+          }
           onCancel={() => setModal(false)}
           isLoading={isLoading}
           headerClass="heading-warning"

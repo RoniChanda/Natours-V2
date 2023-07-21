@@ -1,4 +1,6 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import InnerContainer from "../../components/ui/InnerContainer";
 import Paginate from "../../components/ui/Paginate";
@@ -6,18 +8,18 @@ import UserContainer from "../../components/ui/UserContainer";
 import { useFetchAllToursQuery } from "../../redux/apis/tourApi";
 import InputSelect from "../../components/ui/InputSelect";
 import Loader from "../../components/ui/Loader";
-import Alert from "../../components/ui/Alert";
 import IconFilter from "../../components/ui/IconFilter";
 import OverviewFilterModal from "../../components/tour-details/OverviewFilterModal";
 import ManageTourItem from "../../components/management-details/ManageTourItem";
-import { Link } from "react-router-dom";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
 
 export default function ManageTours() {
   const [modal, setModal] = useState(false);
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState({ difficulty: "", rating: "0" });
   const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
   const { isLoading, error, data } = useFetchAllToursQuery(
     {
       sort,
@@ -29,6 +31,10 @@ export default function ManageTours() {
     { refetchOnMountOrArgChange: true }
   );
 
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+  }, [error, dispatch]);
+
   const inputHandler = (e) => {
     setFilter((prevState) => ({
       ...prevState,
@@ -39,9 +45,7 @@ export default function ManageTours() {
   let content;
   if (isLoading) {
     content = <Loader />;
-  } else if (error) {
-    content = <Alert type="error" msg={error.data?.message || error.error} />;
-  } else {
+  } else if (data) {
     const tours = data.data.tours;
 
     content = (
@@ -108,6 +112,7 @@ export default function ManageTours() {
         )}
 
         {content}
+
         {data && (
           <Paginate
             currentBtn={page}

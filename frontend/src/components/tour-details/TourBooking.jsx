@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
 import { useCheckoutMutation } from "../../redux/apis/bookingApi";
 import ButtonAuth from "../form/ButtonAuth";
-import Alert from "../ui/Alert";
 import { convertDate } from "../../utils/date";
+import { setAlert } from "../../redux/slices/userSlice";
 import "./TourBooking.css";
 
 export default function TourBooking({ set, tourId, startDates, maxGroupSize }) {
   const [date, setDate] = useState("");
   const [tickets, setTickets] = useState();
+  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const paymentStatus = searchParams.get("status");
   const [checkout, { isLoading, data, error }] = useCheckoutMutation();
@@ -19,6 +21,13 @@ export default function TourBooking({ set, tourId, startDates, maxGroupSize }) {
       window.location.href = data.session.url;
     }
   }, [data]);
+
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (paymentStatus === "failed")
+      dispatch(setAlert({ type: "error", msg: "Booking failed!" }));
+  }, [error, dispatch, paymentStatus]);
 
   const dateHandler = (e) => {
     setDate(e.target.value);
@@ -41,25 +50,8 @@ export default function TourBooking({ set, tourId, startDates, maxGroupSize }) {
     checkout({ tourId, formData });
   };
 
-  let alert;
-  if (error) {
-    alert = <Alert type="error" msg={error.data?.message || error.error} />;
-  } else if (paymentStatus) {
-    alert = (
-      <Alert
-        type={paymentStatus === "success" ? "success" : "error"}
-        msg={
-          paymentStatus === "success"
-            ? "Payment successful!"
-            : "Payment failed!"
-        }
-      />
-    );
-  }
-
   return (
     <div className={`tour_booking ${set && "set-tour_booking"}`}>
-      {alert}
       <div className={`tour_dates ${set && "set-tour_dates"}`}>
         <div className="dates_container">
           <h3>Available Dates</h3>

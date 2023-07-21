@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import "./IconFilter.css";
 
 export default function Filter({ onClick, filter }) {

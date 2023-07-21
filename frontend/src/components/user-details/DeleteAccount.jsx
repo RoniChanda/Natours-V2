@@ -8,8 +8,7 @@ import {
   useDeactivateAccountMutation,
   useDeleteAccountMutation,
 } from "../../redux/apis/userApi";
-import Alert from "../ui/Alert";
-import { isLoggedOut } from "../../redux/slices/userSlice";
+import { isLoggedOut, setAlert } from "../../redux/slices/userSlice";
 import "./DeleteAccount.css";
 
 export default function DeleteAccount() {
@@ -30,28 +29,32 @@ export default function DeleteAccount() {
     { isLoading: deleteLoading, isSuccess: deleteSuccess, error: deleteError },
   ] = useDeleteAccountMutation();
 
+  const isLoading = deactivateLoading || deleteLoading;
+  const error = deactivateError || deleteError;
+  const isSuccess = deactivateSuccess || deleteSuccess;
+
   useEffect(() => {
-    if (deactivateSuccess || deleteSuccess) {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (isSuccess) {
       dispatch(isLoggedOut());
+      dispatch(
+        setAlert({ type: "success", msg: `Your account was ${activity}d` })
+      );
       navigate("/");
     }
-  }, [deactivateSuccess, deleteSuccess, navigate, dispatch]);
+  }, [isSuccess, navigate, dispatch, error, activity]);
 
   const proceedHandler = () => {
     if (activity === "deactivate") deactivateAccount();
     if (activity === "delete") deleteAccount();
   };
 
-  const isLoading = deactivateLoading || deleteLoading;
-  const error = deactivateError || deleteError;
-
   return (
     <InnerContainer
       className="user-view__form-container"
       heading="Deactivate or delete account"
     >
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
-
       {modal && activity && (
         <Modal
           headerClass="heading-warning"

@@ -34,5 +34,5 @@ exports.userFeedback = catchAsync(async (req, res, next) => {
 
   await Review.findByIdAndUpdate(reviewId, { likeCount });
 
-  res.status(200).json({ status: "SUCCESS", feedback });
+  res.status(200).json({ status: "SUCCESS" });
 });

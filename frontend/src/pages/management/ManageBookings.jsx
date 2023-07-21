@@ -1,8 +1,8 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import InnerContainer from "../../components/ui/InnerContainer";
 import UserContainer from "../../components/ui/UserContainer";
-import Alert from "../../components/ui/Alert";
 import { useGetAllBookingsQuery } from "../../redux/apis/bookingApi";
 import Loader from "../../components/ui/Loader";
 import ManageBookingItem from "../../components/management-details/ManageBookingItem";
@@ -11,13 +11,14 @@ import IconFilter from "../../components/ui/IconFilter";
 import BookingFilterModal from "../../components/management-details/BookingFilterModal";
 import Paginate from "../../components/ui/Paginate";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
 
 export default function ManageBookings() {
   const [modal, setModal] = useState(false);
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState({ tour: "", status: "" });
   const [page, setPage] = useState(1);
-
+  const dispatch = useDispatch();
   const { isLoading, data, error } = useGetAllBookingsQuery(
     {
       sort,
@@ -27,6 +28,10 @@ export default function ManageBookings() {
     },
     { refetchOnMountOrArgChange: true }
   );
+
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+  }, [error, dispatch]);
 
   const inputHandler = (e) => {
     setFilter((prevState) => ({
@@ -38,9 +43,7 @@ export default function ManageBookings() {
   let content;
   if (isLoading) {
     content = <Loader />;
-  } else if (error) {
-    content = <Alert type="error" msg={error.data?.message || error.error} />;
-  } else {
+  } else if (data) {
     const allBookings = data.data.bookings;
 
     content = (
@@ -100,6 +103,7 @@ export default function ManageBookings() {
         )}
 
         {content}
+
         {data && (
           <Paginate
             currentBtn={page}

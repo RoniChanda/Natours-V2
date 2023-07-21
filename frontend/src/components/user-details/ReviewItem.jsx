@@ -1,25 +1,39 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { convertDate } from "../../utils/date";
 import IconRating from "../ui/IconRating";
-import ReviewModal from "./ReviewModal";
+import ReviewModal from "../shared/ReviewModal";
 import { useDeleteReviewMutation } from "../../redux/apis/reviewApi";
-import Alert from "../ui/Alert";
+import { setAlert } from "../../redux/slices/userSlice";
 import "./ReviewItem.css";
 
 export default function ReviewItem({ booking }) {
   const [reviewModal, setReviewModal] = useState(false);
   const [readMore, setReadMore] = useState(false);
-  const [deleteReview, { isLoading, error }] = useDeleteReviewMutation();
+  const dispatch = useDispatch();
+  const [deleteReview, { isLoading, error, isSuccess }] =
+    useDeleteReviewMutation();
   const review = booking.review[0]?.review;
   const likeCount = booking.review[0]?.likeCount;
   const rating = booking.review[0]?.rating;
 
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (isSuccess) {
+      dispatch(
+        setAlert({
+          type: "success",
+          msg: "Your review was deleted.",
+        })
+      );
+    }
+  }, [error, dispatch, isSuccess]);
+
   return (
     <Fragment>
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
-
       {reviewModal && (
         <ReviewModal
           bookingId={booking._id}

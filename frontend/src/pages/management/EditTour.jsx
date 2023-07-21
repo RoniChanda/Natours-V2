@@ -1,4 +1,5 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import InnerContainer from "../../components/ui/InnerContainer";
@@ -13,9 +14,9 @@ import {
   useUpdateTourMutation,
 } from "../../redux/apis/tourApi";
 import TourGuidesInputs from "../../components/management-details/TourGuidesInputs";
-import Alert from "../../components/ui/Alert";
 import Loader from "../../components/ui/Loader";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
 import "./CreateTour.css";
 
 export default function EditTour() {
@@ -42,6 +43,7 @@ export default function EditTour() {
   const [leadGuide, setLeadGuide] = useState("");
   const [tourGuides, setTourGuides] = useState([]);
   const { id } = useParams();
+  const dispatch = useDispatch();
   const {
     isLoading: fetchLoading,
     error: fetchError,
@@ -85,7 +87,13 @@ export default function EditTour() {
     }
   }, [fetchData]);
 
-  console.log(locations);
+  const error = fetchError || updateError;
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (updateData?.status === "SUCCESS")
+      dispatch(setAlert({ type: "success", msg: "Tour was updated." }));
+  }, [dispatch, error, updateData]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -108,26 +116,10 @@ export default function EditTour() {
     updateTour({ tourId: id, form });
   };
 
-  let alert;
-  if (updateError) {
-    alert = (
-      <Alert
-        type="error"
-        msg={updateError.data?.message || updateError.error}
-      />
-    );
-  } else if (updateData?.status === "SUCCESS") {
-    alert = <Alert type="success" msg="Tour updated Successfully!" />;
-  }
-
   let content;
   if (fetchLoading) {
     content = <Loader />;
-  } else if (fetchError) {
-    content = (
-      <Alert type="error" msg={fetchError.data?.message || fetchError.error} />
-    );
-  } else {
+  } else if (fetchData) {
     content = (
       <form className="form-create-tour" onSubmit={submitHandler}>
         <TourDetailsInputs tourData={tourData} setTourData={setTourData} />
@@ -192,7 +184,7 @@ export default function EditTour() {
             description="Edit tour in Natours"
           />
         )}
-        {alert}
+
         {content}
       </InnerContainer>
     </UserContainer>

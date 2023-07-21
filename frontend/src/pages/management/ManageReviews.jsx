@@ -1,6 +1,6 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-import Alert from "../../components/ui/Alert";
 import InnerContainer from "../../components/ui/InnerContainer";
 import Loader from "../../components/ui/Loader";
 import UserContainer from "../../components/ui/UserContainer";
@@ -11,13 +11,14 @@ import InputSelect from "../../components/ui/InputSelect";
 import ReviewFilterModal from "../../components/management-details/ReviewFilterModal";
 import Paginate from "../../components/ui/Paginate";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
 
 export default function ManageReviews() {
   const [modal, setModal] = useState(false);
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState({ tour: "", rating: "" });
   const [page, setPage] = useState(1);
-
+  const dispatch = useDispatch();
   const { isLoading, error, data } = useGetAllReviewsQuery(
     {
       sort,
@@ -27,6 +28,10 @@ export default function ManageReviews() {
     },
     { refetchOnMountOrArgChange: true }
   );
+
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+  }, [error, dispatch]);
 
   const inputHandler = (e) => {
     setFilter((prevState) => ({
@@ -38,9 +43,7 @@ export default function ManageReviews() {
   let content;
   if (isLoading) {
     content = <Loader />;
-  } else if (error) {
-    content = <Alert type="error" msg={error.data?.message || error.error} />;
-  } else {
+  } else if (data) {
     const allReviews = data.data.reviews;
 
     content = (
@@ -100,6 +103,7 @@ export default function ManageReviews() {
         )}
 
         {content}
+
         {data && (
           <Paginate
             currentBtn={page}

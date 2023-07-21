@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import InnerContainer from "../ui/InnerContainer";
 import Input from "../form/Input";
 import { useVerify2FAMutation } from "../../redux/apis/authApi";
 import ModalContainer from "../ui/ModalContainer";
+import { setAlert } from "../../redux/slices/userSlice";
 import "./SetupTwoFactorModal.css";
 
 export default function SetupTwoFactorModal({
@@ -11,15 +13,24 @@ export default function SetupTwoFactorModal({
   secret,
   onCancel,
   setModal,
-  setVerify2FAError,
 }) {
   const [token, setToken] = useState("");
+  const dispatch = useDispatch();
   const [verify2FA, { isLoading, error, data }] = useVerify2FAMutation();
 
   useEffect(() => {
-    if (error) setVerify2FAError(error);
-    if (data?.status === "SUCCESS") setModal(false);
-  }, [data, setModal, error, setVerify2FAError]);
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (data?.status === "SUCCESS") {
+      dispatch(
+        setAlert({
+          type: "success",
+          msg: "Two-Factor authentication was enabled.",
+        })
+      );
+      setModal(false);
+    }
+  }, [data, setModal, dispatch, error]);
 
   const submitHandler = (e) => {
     e.preventDefault();

@@ -1,15 +1,21 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import InputSelect from "../ui/InputSelect";
 import FilterModal from "../ui/FilterModal";
 import { useFetchAllToursQuery } from "../../redux/apis/tourApi";
-import Alert from "../ui/Alert";
+import { setAlert } from "../../redux/slices/userSlice";
 
 export default function BookingFilterModal({ onCancel, inputHandler, filter }) {
+  const dispatch = useDispatch();
   const { data, error } = useFetchAllToursQuery({ limit: "_id,name" });
+
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+  }, [error, dispatch]);
 
   return (
     <FilterModal onCancel={onCancel}>
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
-
       <div className="filter-modal-inner">
         <InputSelect type="tour" onChange={inputHandler} value={filter.tour}>
           <option value="">All</option>

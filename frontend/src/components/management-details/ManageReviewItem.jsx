@@ -1,25 +1,33 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import IconRating from "../ui/IconRating";
 import { convertDate } from "../../utils/date";
-import "./ManageReviewItem.css";
-import ReviewModal from "../user-details/ReviewModal";
+import ReviewModal from "../shared/ReviewModal";
 import { useDeleteReviewMutation } from "../../redux/apis/reviewApi";
-import Alert from "../ui/Alert";
 import Modal from "../ui/Modal";
 import Actions from "./Actions";
+import { setAlert } from "../../redux/slices/userSlice";
+import "./ManageReviewItem.css";
 
 export default function ManageReviewItem({ reviewObj }) {
   const [modal, setModal] = useState(false);
   const [reviewModal, setReviewModal] = useState(false);
   const [readMore, setReadMore] = useState(false);
-  const [deleteReview, { isLoading, error }] = useDeleteReviewMutation();
+  const dispatch = useDispatch();
+  const [deleteReview, { isLoading, error, isSuccess }] =
+    useDeleteReviewMutation();
   const { user, tour, review } = reviewObj;
+
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (isSuccess)
+      dispatch(setAlert({ type: "success", msg: "Review was deleted." }));
+  }, [error, dispatch, isSuccess]);
 
   return (
     <Fragment>
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
-
       {modal && (
         <Modal
           heading="Delete Review"

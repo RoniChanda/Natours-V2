@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import Alert from "../../components/ui/Alert";
 import Container from "../../components/ui/Container";
 import InnerContainer from "../../components/ui/InnerContainer";
 import Input from "../../components/form/Input";
@@ -10,8 +9,9 @@ import { useSignupMutation } from "../../redux/apis/authApi";
 import InputPhone from "../../components/form/InputPhone";
 import { PHONE_COUNTRIES } from "../../utils/phoneValidation";
 import ButtonAuth from "../../components/form/ButtonAuth";
-import "./Login.css";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
+import "./Login.css";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -22,13 +22,23 @@ export default function Login() {
   });
   const [phone, setPhone] = useState();
   const [valid, setValid] = useState(false);
-  const [signup, { isLoading, data, error }] = useSignupMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [signup, { isLoading, data, error }] = useSignupMutation();
 
   useEffect(() => {
-    if (data?.status === "SUCCESS") navigate("/");
-  }, [data, dispatch, navigate]);
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (data?.status === "SUCCESS") {
+      dispatch(
+        setAlert({
+          type: "success",
+          msg: `Welcome, ${data?.data?.user.name}!`,
+        })
+      );
+      navigate("/");
+    }
+  }, [data, dispatch, navigate, error]);
 
   const inputHandler = (e) => {
     setFormData((prevState) => ({
@@ -48,7 +58,6 @@ export default function Login() {
         title="Signup | Natours"
         description="Signup to Natours with email and password"
       />
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
       <InnerContainer className="login-form" heading="Create new account">
         <form onSubmit={submitHandler}>
           <Input

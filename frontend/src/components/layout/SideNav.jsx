@@ -1,6 +1,7 @@
+import { Fragment } from "react";
+
 import SideNavItem from "./SideNavItem";
 import "./SideNav.css";
-import { Fragment } from "react";
 
 export default function SideNav({ role }) {
   return (
@@ -27,7 +28,7 @@ export default function SideNav({ role }) {
         {role === "user" && (
           <SideNavItem
             className={({ isActive }) => (isActive ? "side-nav--active" : "")}
-            link="/me/Reviews"
+            link="/me/reviews"
             text="My reviews"
             icon="star"
           />

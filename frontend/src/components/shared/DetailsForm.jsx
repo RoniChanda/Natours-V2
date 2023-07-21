@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-import Alert from "../ui/Alert";
 import Input from "../form/Input";
 import InputPhone from "../form/InputPhone";
 import { PHONE_COUNTRIES } from "../../utils/phoneValidation";
@@ -8,6 +8,7 @@ import {
   useUpdateMeMutation,
   useUpdateUserByIdMutation,
 } from "../../redux/apis/userApi";
+import { setAlert } from "../../redux/slices/userSlice";
 import "./DetailsForm.css";
 
 export default function DetailsForm({ name, email, userPhone, photo, userId }) {
@@ -19,6 +20,7 @@ export default function DetailsForm({ name, email, userPhone, photo, userId }) {
   const [phone, setPhone] = useState();
   const [valid, setValid] = useState(false);
   const [photoName, setPhotoName] = useState("");
+  const dispatch = useDispatch();
   const [
     updateMe,
     { isLoading: updateMeLoading, data: updateMeData, error: updateMeError },
@@ -38,6 +40,17 @@ export default function DetailsForm({ name, email, userPhone, photo, userId }) {
     }
     if (userPhone) setPhone(userPhone);
   }, [name, email, photo, userPhone]);
+
+  const error = updateMeError || updateByIdError;
+  const isLoading = updateMeLoading || updateByIdLoading;
+  const data = updateMeData || updateByIdData;
+
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (data?.status === "SUCCESS")
+      dispatch(setAlert({ type: "success", msg: "Details was updated." }));
+  }, [error, dispatch, data]);
 
   const inputHandler = (e) => {
     setFormData((prevState) => ({
@@ -65,20 +78,8 @@ export default function DetailsForm({ name, email, userPhone, photo, userId }) {
     }
   };
 
-  const error = updateMeError || updateByIdError;
-  const isLoading = updateMeLoading || updateByIdLoading;
-  const data = updateMeData || updateByIdData;
-
-  let alert;
-  if (error) {
-    alert = <Alert type="error" msg={error.data?.message || error.error} />;
-  } else if (data?.status === "SUCCESS") {
-    alert = <Alert type="success" msg="Data updated successfully!" />;
-  }
-
   return (
     <form onSubmit={submitHandler}>
-      {alert}
       <Input
         required
         name="name"

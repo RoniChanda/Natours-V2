@@ -1,16 +1,18 @@
 import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { convertDate } from "../../utils/date";
 import IconRating from "../ui/IconRating";
 import { useProvideFeedbackMutation } from "../../redux/apis/reviewApi";
-import Alert from "../ui/Alert";
-import "./TourReviewModalItem.css";
 import Loader from "../ui/Loader";
+import { setAlert } from "../../redux/slices/userSlice";
+import "./TourReviewModalItem.css";
 
 export default function ReviewModalItem({ reviewObj, tourStartDate }) {
   const [readMore, setReadMore] = useState(false);
   const [like, setLike] = useState(false);
   const [unlike, setUnlike] = useState(false);
+  const dispatch = useDispatch();
   const { user, createdAt, review, rating } = reviewObj;
   const [provideFeedback, { isLoading, error, data }] =
     useProvideFeedbackMutation();
@@ -24,33 +26,29 @@ export default function ReviewModalItem({ reviewObj, tourStartDate }) {
 
   useEffect(() => {
     if (error) {
+      dispatch(setAlert({ type: "error", msg: error }));
       setLike(false);
       setUnlike(false);
     }
-  }, [error]);
+
+    if (data?.status === "SUCCESS")
+      dispatch(setAlert({ type: "success", msg: "Thanks for your feedback!" }));
+  }, [error, data, dispatch]);
 
   const likeHandler = () => {
     provideFeedback({ reviewId: reviewObj._id, feedback: !like && "like" });
     setLike((prevState) => !prevState);
     setUnlike(false);
   };
+
   const unlikeHandler = () => {
     provideFeedback({ reviewId: reviewObj._id, feedback: !unlike && "unlike" });
     setUnlike((prevState) => !prevState);
     setLike(false);
   };
 
-  let alert;
-  if (error) {
-    alert = <Alert type="error" msg={error.data?.message || error.error} />;
-  } else if (data?.feedback) {
-    alert = <Alert type="success" msg="Thanks for your feedback!" />;
-  }
-
   return (
     <Fragment>
-      {alert}
-
       <div className="review-modal-item">
         <img src={user.photo} alt={user.name} className="item_user_photo" />
         <div className="review-modal-user">

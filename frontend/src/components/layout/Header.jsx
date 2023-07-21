@@ -1,29 +1,31 @@
 import { Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import Search from "../ui/Search";
-import Alert from "../ui/Alert";
 import { useLogoutMutation } from "../../redux/apis/authApi";
 import { useGetMeQuery } from "../../redux/apis/userApi";
+import { setAlert } from "../../redux/slices/userSlice";
 import "./Header.css";
 
 export default function Header() {
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { isLoading: getMeLoading } = useGetMeQuery(null, { skip: user });
-  const [logout, { error: logoutError, data: logoutData }] =
-    useLogoutMutation();
+  const [logout, { error, data }] = useLogoutMutation();
 
   useEffect(() => {
-    if (logoutData?.status === "SUCCESS") navigate("/");
-  }, [navigate, logoutData]);
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
 
-  const error = logoutError;
+    if (data?.status === "SUCCESS") {
+      dispatch(setAlert({ type: "success", msg: "Logout successful." }));
+      navigate("/");
+    }
+  }, [navigate, data, error, dispatch]);
 
   return (
     <header className="header">
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
       <nav className="nav nav--tours">
         <Link to="/" className="nav__el">
           All tours

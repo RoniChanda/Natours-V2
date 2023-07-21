@@ -1,23 +1,28 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import Loader from "../../components/ui/Loader";
-import Alert from "../../components/ui/Alert";
 import UserContainer from "../../components/ui/UserContainer";
 import DetailsForm from "../../components/shared/DetailsForm";
 import { useGetUserByIdQuery } from "../../redux/apis/userApi";
 import InnerContainer from "../../components/ui/InnerContainer";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
 
 export default function EditUser() {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const { isLoading, data, error } = useGetUserByIdQuery(id);
+
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+  }, [error, dispatch]);
 
   let content;
   if (isLoading) {
     content = <Loader />;
-  } else if (error) {
-    content = <Alert type="error" msg={error.data?.message || error.error} />;
-  } else {
+  } else if (data) {
     const user = data.data.user;
 
     content = (

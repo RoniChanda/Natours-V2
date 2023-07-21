@@ -1,16 +1,18 @@
 import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { convertDate } from "../../utils/date";
 import { useCancelMyBookingMutation } from "../../redux/apis/bookingApi";
-import Alert from "../ui/Alert";
 import BookingDetailsItem from "./BookingDetailsItem";
 import Modal from "../ui/Modal";
+import { setAlert } from "../../redux/slices/userSlice";
 import "./BookingItem.css";
 
 export default function BookingItem({ booking }) {
   const [modal, setModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
+  const dispatch = useDispatch();
   const [cancelBooking, { isLoading, error, data }] =
     useCancelMyBookingMutation();
 
@@ -26,13 +28,16 @@ export default function BookingItem({ booking }) {
   }
 
   useEffect(() => {
-    if (data?.status === "SUCCESS") setModal(false);
-  }, [data]);
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (data?.status === "SUCCESS") {
+      dispatch(setAlert({ type: "success", msg: "Booking was canceled." }));
+      setModal(false);
+    }
+  }, [data, dispatch, error]);
 
   return (
     <Fragment>
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
-
       {modal && (
         <Modal
           onProceed={() => cancelBooking(booking._id)}

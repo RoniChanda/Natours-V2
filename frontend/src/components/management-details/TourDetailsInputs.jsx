@@ -65,7 +65,6 @@ export default function TourDetailsInputs({ setTourData, tourData }) {
         value={tourData.price}
       />
       <Input
-        required
         name="priceDiscount"
         type="number"
         placeholder="Discount ($)"

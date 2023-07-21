@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 import Container from "../../components/ui/Container";
@@ -9,14 +10,15 @@ import {
   useResetPasswordUsingCodeMutation,
   useResetPasswordUsingLinkMutation,
 } from "../../redux/apis/authApi";
-import Alert from "../../components/ui/Alert";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
 
 export default function ResetPassword() {
   const [formData, setFormData] = useState({
     password: "",
     passwordConfirm: "",
   });
+  const dispatch = useDispatch();
   const { token } = useParams();
   const [searchParams] = useSearchParams();
   const userId = searchParams.get("id");
@@ -35,10 +37,18 @@ export default function ResetPassword() {
   const error = linkError || codeError;
 
   useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
     if (data?.status === "SUCCESS") {
-      navigate("/auth/login?status=success&msg=Password reset successful.");
+      dispatch(
+        setAlert({
+          type: "success",
+          msg: "Password reset successful. Login with your new password.",
+        })
+      );
+      navigate("/auth/login");
     }
-  }, [data, navigate]);
+  }, [data, navigate, dispatch, error]);
 
   const inputHandler = (e) => {
     setFormData((prevState) => ({
@@ -59,7 +69,7 @@ export default function ResetPassword() {
         title={`Reset Password | Natours`}
         description="Reset your password"
       />
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
+
       <InnerContainer className="login-form" heading="Reset Password">
         <form onSubmit={submitHandler}>
           <Input

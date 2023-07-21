@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import InnerContainer from "../../components/ui/InnerContainer";
@@ -10,9 +11,9 @@ import TourLocationsInputs from "../../components/management-details/TourLocatio
 import TourImages from "../../components/management-details/TourImages";
 import { useCreateTourMutation } from "../../redux/apis/tourApi";
 import TourGuidesInputs from "../../components/management-details/TourGuidesInputs";
-import Alert from "../../components/ui/Alert";
-import "./CreateTour.css";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
+import "./CreateTour.css";
 
 export default function CreateTour() {
   const [tourData, setTourData] = useState({
@@ -38,11 +39,17 @@ export default function CreateTour() {
   const [leadGuide, setLeadGuide] = useState("");
   const [tourGuides, setTourGuides] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [createTour, { isLoading, error, data }] = useCreateTourMutation();
 
   useEffect(() => {
-    if (data?.status === "SUCCESS") navigate("/manage/tours");
-  }, [data, navigate]);
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (data?.status === "SUCCESS") {
+      dispatch(setAlert({ type: "success", msg: "A new tour was created." }));
+      navigate("/manage/tours");
+    }
+  }, [data, navigate, dispatch, error]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -75,10 +82,6 @@ export default function CreateTour() {
         heading="Create new tour"
         className="user-view__form-container"
       >
-        {error && (
-          <Alert type="error" msg={error.data?.message || error.error} />
-        )}
-
         <form className="form-create-tour" onSubmit={submitHandler}>
           <TourDetailsInputs tourData={tourData} setTourData={setTourData} />
           <div className="line span-all-columns line-small">&nbsp;</div>

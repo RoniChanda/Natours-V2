@@ -1,6 +1,8 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { useGetGuidesQuery } from "../../redux/apis/userApi";
+import { setAlert } from "../../redux/slices/userSlice";
 import "./TourGuidesInputs.css";
 
 export default function TourGuidesInputs({
@@ -10,11 +12,16 @@ export default function TourGuidesInputs({
   setTourGuides,
 }) {
   const [otherGuide, setOtherGuide] = useState("");
-  const { data } = useGetGuidesQuery();
+  const dispatch = useDispatch();
+  const { data, error } = useGetGuidesQuery();
   const leadGuides = data?.data?.guides?.filter(
     (el) => el.role === "lead-guide"
   );
   const guides = data?.data?.guides?.filter((el) => el.role === "guide");
+
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+  }, [error, dispatch]);
 
   const addGuideHandler = () => {
     if (otherGuide) setTourGuides((prevState) => [...prevState, otherGuide]);

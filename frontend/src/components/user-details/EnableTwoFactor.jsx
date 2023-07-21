@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import InnerContainer from "../ui/InnerContainer";
 import {
   useDisable2FAMutation,
   useEnable2FAMutation,
 } from "../../redux/apis/authApi";
-import Alert from "../ui/Alert";
 import SetupTwoFactorModal from "./SetupTwoFactorModal";
+import { setAlert } from "../../redux/slices/userSlice";
 
 export default function EnableTwoFactor() {
   const [modal, setModal] = useState(false);
-  const [verify2FAError, setVerify2FAError] = useState("");
   const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [
     enable2FA,
     { isLoading: enable2FALoading, error: enable2FAError, data: enable2FAData },
   ] = useEnable2FAMutation();
-  const [disable2FA, { isLoading: disable2FALoading, error: disable2FAError }] =
-    useDisable2FAMutation();
+  const [
+    disable2FA,
+    {
+      isLoading: disable2FALoading,
+      error: disable2FAError,
+      data: disable2FAData,
+    },
+  ] = useDisable2FAMutation();
 
   useEffect(() => {
     if (enable2FAData?.status === "SUCCESS") {
@@ -26,21 +32,30 @@ export default function EnableTwoFactor() {
     }
   }, [enable2FAData]);
 
-  const error = enable2FAError || disable2FAError || verify2FAError;
+  const error = enable2FAError || disable2FAError;
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (disable2FAData?.status === "SUCCESS")
+      dispatch(
+        setAlert({
+          type: "success",
+          msg: "Two-Factor authentication was disabled.",
+        })
+      );
+  }, [dispatch, error, disable2FAData]);
 
   return (
     <InnerContainer
       className="user-view__form-container"
       heading="Two-Factor Authentication"
     >
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
       {modal && (
         <SetupTwoFactorModal
-          qrCode={enable2FAData.imageURL}
-          secret={enable2FAData.secret}
+          qrCode={enable2FAData?.imageURL}
+          secret={enable2FAData?.secret}
           onCancel={() => setModal(false)}
           setModal={setModal}
-          setVerify2FAError={setVerify2FAError}
         />
       )}
       <p className="title__description">

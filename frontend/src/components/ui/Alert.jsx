@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import ReactDOM from "react-dom";
 
+import { clearAlert } from "../../redux/slices/userSlice";
 import "./Alert.css";
 
 export default function Alert({ type, msg }) {
-  const [showAlert, setShowAlert] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowAlert(false), 5000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (type && msg) {
+      setShowAlert(true);
+      const timer = setTimeout(() => {
+        setShowAlert(false);
+        dispatch(clearAlert());
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [msg, type, dispatch]);
 
   const content = (
     <div className={`alert alert--${type}`}>

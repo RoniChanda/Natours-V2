@@ -1,30 +1,41 @@
-import { Fragment, useState } from "react";
-import { useSelector } from "react-redux";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
 import InnerContainer from "../../components/ui/InnerContainer";
 import { useGetMyBookingsQuery } from "../../redux/apis/bookingApi";
 import BookingItem from "../../components/user-details/BookingItem";
 import Loader from "../../components/ui/Loader";
-import Alert from "../../components/ui/Alert";
 import UserContainer from "../../components/ui/UserContainer";
-import "./MyBookings.css";
 import Paginate from "../../components/ui/Paginate";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
+import "./MyBookings.css";
 
 export default function MyBookings() {
   const [page, setPage] = useState(1);
   const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const paymentStatus = searchParams.get("status");
   const { isLoading, data, error } = useGetMyBookingsQuery(
     { page, limit: 6 },
     { refetchOnMountOrArgChange: true }
   );
 
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (paymentStatus === "success")
+      dispatch(
+        setAlert({ type: "success", msg: "Your booking was successful." })
+      );
+  }, [error, dispatch, paymentStatus]);
+
   let content;
   if (isLoading) {
     content = <Loader />;
-  } else if (error) {
-    content = <Alert type="error" msg={error.data?.message || error.error} />;
-  } else {
+  } else if (data) {
     const bookings = data.data.bookings;
 
     if (bookings.length === 0) {

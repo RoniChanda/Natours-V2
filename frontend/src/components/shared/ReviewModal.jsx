@@ -1,13 +1,14 @@
 import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { convertDate } from "../../utils/date";
 import InputRating from "../form/InputRating";
 import InnerContainer from "../ui/InnerContainer";
 import { useUpdateReviewMutation } from "../../redux/apis/reviewApi";
-import Alert from "../ui/Alert";
 import ModalContainer from "../ui/ModalContainer";
 import { useCreateMyReviewMutation } from "../../redux/apis/bookingApi";
+import { setAlert } from "../../redux/slices/userSlice";
 import "./ReviewModal.css";
 
 export default function ReviewModal({
@@ -20,6 +21,7 @@ export default function ReviewModal({
 }) {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
+  const dispatch = useDispatch();
   const [
     createReview,
     {
@@ -37,10 +39,6 @@ export default function ReviewModal({
     },
   ] = useUpdateReviewMutation();
 
-  const data = createReviewData || updateReviewData;
-  const error = createReviewError || updateReviewError;
-  const isLoading = createReviewLoading || updateReviewLoading;
-
   useEffect(() => {
     if (reviewObj) {
       setRating(reviewObj.rating);
@@ -48,9 +46,22 @@ export default function ReviewModal({
     }
   }, [reviewObj]);
 
+  const error = createReviewError || updateReviewError;
+  const isLoading = createReviewLoading || updateReviewLoading;
+
   useEffect(() => {
-    if (data?.status === "SUCCESS") setReviewModal(false);
-  }, [data, setReviewModal]);
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+
+    if (createReviewData?.status === "SUCCESS") {
+      setReviewModal(false);
+      dispatch(setAlert({ type: "success", msg: "Thanks for your feedback!" }));
+    }
+
+    if (updateReviewData?.status === "SUCCESS") {
+      setReviewModal(false);
+      dispatch(setAlert({ type: "success", msg: "Review was updated." }));
+    }
+  }, [error, dispatch, updateReviewData, createReviewData, setReviewModal]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -64,8 +75,6 @@ export default function ReviewModal({
 
   return (
     <Fragment>
-      {error && <Alert type="error" msg={error.data?.message || error.error} />}
-
       <ModalContainer>
         <InnerContainer
           className="form-modal"

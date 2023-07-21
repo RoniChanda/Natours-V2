@@ -1,23 +1,24 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import UserContainer from "../../components/ui/UserContainer";
 import InnerContainer from "../../components/ui/InnerContainer";
 import { useGetAllUsersQuery } from "../../redux/apis/userApi";
 import Loader from "../../components/ui/Loader";
-import Alert from "../../components/ui/Alert";
 import ManageUserItem from "../../components/management-details/ManageUserItem";
 import InputSelect from "../../components/ui/InputSelect";
 import IconFilter from "../../components/ui/IconFilter";
 import UserFilterModal from "../../components/management-details/UserFilterModal";
 import Paginate from "../../components/ui/Paginate";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
 
 export default function ManageUsers() {
   const [modal, setModal] = useState(false);
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState({ provider: "", role: "", active: "" });
   const [page, setPage] = useState(1);
-
+  const dispatch = useDispatch();
   const { isLoading, data, error } = useGetAllUsersQuery(
     {
       sort,
@@ -27,6 +28,10 @@ export default function ManageUsers() {
     },
     { refetchOnMountOrArgChange: true }
   );
+
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+  }, [error, dispatch]);
 
   const inputHandler = (e) => {
     setFilter((prevState) => ({
@@ -38,9 +43,7 @@ export default function ManageUsers() {
   let content;
   if (isLoading) {
     content = <Loader />;
-  } else if (error) {
-    content = <Alert type="error" msg={error.data?.message || error.error} />;
-  } else {
+  } else if (data) {
     const allUsers = data.data.users;
 
     content = (
@@ -99,7 +102,9 @@ export default function ManageUsers() {
             filter={filter}
           />
         )}
+
         {content}
+
         {data && (
           <Paginate
             currentBtn={page}

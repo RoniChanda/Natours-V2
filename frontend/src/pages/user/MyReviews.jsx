@@ -1,19 +1,20 @@
-import { Fragment, useState } from "react";
-import { useSelector } from "react-redux";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useGetMyBookingsQuery } from "../../redux/apis/bookingApi";
 import InnerContainer from "../../components/ui/InnerContainer";
-import Alert from "../../components/ui/Alert";
 import Loader from "../../components/ui/Loader";
 import ReviewItem from "../../components/user-details/ReviewItem";
 import { getTourStatus } from "../../utils/tourStatus";
 import UserContainer from "../../components/ui/UserContainer";
 import Paginate from "../../components/ui/Paginate";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
 
 export default function MyReviews() {
   const [page, setPage] = useState(1);
   const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const { isLoading, data, error } = useGetMyBookingsQuery(
     {
       page,
@@ -23,12 +24,14 @@ export default function MyReviews() {
     { refetchOnMountOrArgChange: true }
   );
 
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+  }, [error, dispatch]);
+
   let content;
   if (isLoading) {
     content = <Loader />;
-  } else if (error) {
-    content = <Alert type="error" msg={error.data?.message || error.error} />;
-  } else {
+  } else if (data) {
     const bookings = data.data.bookings;
     console.log(bookings);
     const tourStatus = bookings.map((el) => {

@@ -1,23 +1,25 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
 import TourCard from "../../components/tour-details/TourCard";
 import { useFetchAllToursQuery } from "../../redux/apis/tourApi";
-import Alert from "../../components/ui/Alert";
 import Loader from "../../components/ui/Loader";
 import Footer from "../../components/layout/Footer";
 import InputSelect from "../../components/ui/InputSelect";
 import IconFilter from "../../components/ui/IconFilter";
 import OverviewFilterModal from "../../components/tour-details/OverviewFilterModal";
 import Paginate from "../../components/ui/Paginate";
-import "./Overview.css";
 import Meta from "../../components/ui/Meta";
+import { setAlert } from "../../redux/slices/userSlice";
+import "./Overview.css";
 
 export default function Overview() {
   const [modal, setModal] = useState(false);
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState({ difficulty: "", rating: "0" });
   const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get("search") || "";
   const { isLoading, data, error } = useFetchAllToursQuery({
@@ -37,12 +39,14 @@ export default function Overview() {
     }));
   };
 
+  useEffect(() => {
+    if (error) dispatch(setAlert({ type: "error", msg: error }));
+  }, [error, dispatch]);
+
   let content;
   if (isLoading) {
     content = <Loader />;
-  } else if (error) {
-    content = <Alert type="error" msg={error.data?.message || error.error} />;
-  } else {
+  } else if (data) {
     const tours = data.data.tours;
 
     const contentBody = tours.map((tour) => (
