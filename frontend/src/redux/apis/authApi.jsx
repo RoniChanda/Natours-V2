@@ -5,7 +5,6 @@ import { bookingApi } from "./bookingApi";
 import { userApi } from "./userApi";
 import { logError } from "../../utils/logError";
 import { tourApi } from "./tourApi";
-import { isLoggedOut } from "../slices/userSlice";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -57,7 +56,7 @@ export const authApi = createApi({
       async onQueryStarted(args, obj) {
         logError(obj, async () => {
           await obj.queryFulfilled;
-          obj.dispatch(isLoggedOut());
+          obj.dispatch(userApi.util.resetApiState());
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
         });
       },

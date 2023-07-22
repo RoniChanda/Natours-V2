@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams, useSearchParams } from "react-router-dom";
 
 import { useFetchTourDetailsQuery } from "../../redux/apis/tourApi";
@@ -16,7 +16,6 @@ import Meta from "../../components/ui/Meta";
 import { setAlert } from "../../redux/slices/userSlice";
 
 export default function TourDetails() {
-  const { user } = useSelector((state) => state.user);
   const { id } = useParams();
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
@@ -25,9 +24,9 @@ export default function TourDetails() {
   useEffect(() => {
     if (error) dispatch(setAlert({ type: "error", msg: error }));
 
-    if (searchParams.get("status") === "success" && user)
-      dispatch(setAlert({ type: "success", msg: `Welcome, ${user.name}!` }));
-  }, [error, dispatch, searchParams, user]);
+    if (searchParams.get("status") === "success")
+      dispatch(setAlert({ type: "success", msg: `Welcome to Natours!` }));
+  }, [error, dispatch, searchParams]);
 
   let content;
   if (isLoading) {

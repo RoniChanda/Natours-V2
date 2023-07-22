@@ -23,12 +23,7 @@ export default function ValidateTwoFactor() {
     if (error) dispatch(setAlert({ type: "error", msg: error }));
 
     if (data?.status === "SUCCESS") {
-      dispatch(
-        setAlert({
-          type: "success",
-          msg: `Welcome back, ${data?.data?.user.name}!`,
-        })
-      );
+      dispatch(setAlert({ type: "success", msg: `Welcome to Natours!` }));
       navigate(redirect);
     }
   }, [data, navigate, redirect, dispatch, error]);

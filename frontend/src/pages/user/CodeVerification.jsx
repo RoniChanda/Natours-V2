@@ -65,13 +65,8 @@ export default function CodeVerification() {
     } else if (searchParams.get("type") === "twoFactor") {
       validate2FA({ code })
         .unwrap()
-        .then(({ data }) => {
-          dispatch(
-            setAlert({
-              type: "success",
-              msg: `Welcome back, ${data?.data?.user.name}!`,
-            })
-          );
+        .then(() => {
+          dispatch(setAlert({ type: "success", msg: `Welcome to Natours!` }));
           navigate(redirect);
         });
     } else if (searchParams.get("type") === "verification") {
