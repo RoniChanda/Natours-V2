@@ -1,7 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import customFetchBase from "../customFetchBase";
-import { logError } from "../../utils/logError";
 import { tourApi } from "./tourApi";
 
 export const bookingApi = createApi({
@@ -47,10 +46,12 @@ export const bookingApi = createApi({
       }),
 
       async onQueryStarted(args, obj) {
-        logError(obj, async () => {
+        try {
           await obj.queryFulfilled;
           obj.dispatch(tourApi.util.invalidateTags(["tours"]));
-        });
+        } catch (error) {
+          if (import.meta.env.DEV) console.log(error);
+        }
       },
     }),
 

@@ -1,7 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import customFetchBase from "../customFetchBase";
-import { logError } from "../../utils/logError";
 import { tourApi } from "./tourApi";
 import { bookingApi } from "./bookingApi";
 
@@ -29,11 +28,13 @@ export const reviewApi = createApi({
       }),
 
       async onQueryStarted(args, obj) {
-        logError(obj, async () => {
+        try {
           await obj.queryFulfilled;
           obj.dispatch(tourApi.util.invalidateTags(["tours"]));
           obj.dispatch(bookingApi.util.invalidateTags(["userBookings"]));
-        });
+        } catch (error) {
+          if (import.meta.env.DEV) console.log(error);
+        }
       },
     }),
 
@@ -46,11 +47,13 @@ export const reviewApi = createApi({
       }),
 
       async onQueryStarted(args, obj) {
-        logError(obj, async () => {
+        try {
           await obj.queryFulfilled;
           obj.dispatch(tourApi.util.invalidateTags(["tours"]));
           obj.dispatch(bookingApi.util.invalidateTags(["userBookings"]));
-        });
+        } catch (error) {
+          if (import.meta.env.DEV) console.log(error);
+        }
       },
     }),
 
@@ -63,10 +66,12 @@ export const reviewApi = createApi({
       }),
 
       async onQueryStarted(args, obj) {
-        logError(obj, async () => {
+        try {
           await obj.queryFulfilled;
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
-        });
+        } catch (error) {
+          if (import.meta.env.DEV) console.log(error);
+        }
       },
     }),
   }),

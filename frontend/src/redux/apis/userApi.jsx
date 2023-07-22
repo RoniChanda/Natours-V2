@@ -2,7 +2,6 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 
 import customFetchBase from "../customFetchBase";
 import { getUser } from "../slices/userSlice";
-import { logError } from "../../utils/logError";
 
 export const userApi = createApi({
   reducerPath: "userApi",
@@ -17,10 +16,12 @@ export const userApi = createApi({
       }),
 
       async onQueryStarted(args, obj) {
-        logError(obj, async () => {
+        try {
           const { data } = await obj.queryFulfilled;
           obj.dispatch(getUser(data.data.user));
-        });
+        } catch (error) {
+          if (import.meta.env.DEV) console.log(error);
+        }
       },
     }),
 

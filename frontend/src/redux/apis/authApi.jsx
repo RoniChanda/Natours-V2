@@ -3,7 +3,6 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import customFetchBase from "../customFetchBase";
 import { bookingApi } from "./bookingApi";
 import { userApi } from "./userApi";
-import { logError } from "../../utils/logError";
 import { tourApi } from "./tourApi";
 
 export const authApi = createApi({
@@ -19,11 +18,13 @@ export const authApi = createApi({
       }),
 
       async onQueryStarted(args, obj) {
-        logError(obj, async () => {
+        try {
           await obj.queryFulfilled;
           obj.dispatch(userApi.util.invalidateTags(["me"]));
           obj.dispatch(bookingApi.util.resetApiState());
-        });
+        } catch (error) {
+          if (import.meta.env.DEV) console.log(error);
+        }
       },
     }),
 
@@ -36,12 +37,14 @@ export const authApi = createApi({
       }),
 
       async onQueryStarted(args, obj) {
-        logError(obj, async () => {
+        try {
           await obj.queryFulfilled;
           obj.dispatch(userApi.util.invalidateTags(["me"]));
           obj.dispatch(bookingApi.util.resetApiState());
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
-        });
+        } catch (error) {
+          if (import.meta.env.DEV) console.log(error);
+        }
       },
     }),
 
@@ -54,11 +57,13 @@ export const authApi = createApi({
       }),
 
       async onQueryStarted(args, obj) {
-        logError(obj, async () => {
+        try {
           await obj.queryFulfilled;
           obj.dispatch(userApi.util.resetApiState());
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
-        });
+        } catch (error) {
+          if (import.meta.env.DEV) console.log(error);
+        }
       },
     }),
 
@@ -116,10 +121,12 @@ export const authApi = createApi({
       }),
 
       async onQueryStarted(args, obj) {
-        logError(obj, async () => {
+        try {
           await obj.queryFulfilled;
           obj.dispatch(userApi.util.invalidateTags(["me"]));
-        });
+        } catch (error) {
+          if (import.meta.env.DEV) console.log(error);
+        }
       },
     }),
 
@@ -132,10 +139,12 @@ export const authApi = createApi({
       }),
 
       async onQueryStarted(args, obj) {
-        logError(obj, async () => {
+        try {
           await obj.queryFulfilled;
           obj.dispatch(userApi.util.invalidateTags(["me"]));
-        });
+        } catch (error) {
+          if (import.meta.env.DEV) console.log(error);
+        }
       },
     }),
 
@@ -148,12 +157,14 @@ export const authApi = createApi({
       }),
 
       async onQueryStarted(args, obj) {
-        logError(obj, async () => {
+        try {
           await obj.queryFulfilled;
           obj.dispatch(userApi.util.invalidateTags(["me"]));
           obj.dispatch(bookingApi.util.resetApiState());
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
-        });
+        } catch (error) {
+          if (import.meta.env.DEV) console.log(error);
+        }
       },
     }),
 
@@ -175,12 +186,14 @@ export const authApi = createApi({
       }),
 
       async onQueryStarted(args, obj) {
-        logError(obj, async () => {
+        try {
           await obj.queryFulfilled;
           obj.dispatch(userApi.util.invalidateTags(["me"]));
           obj.dispatch(bookingApi.util.resetApiState());
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
-        });
+        } catch (error) {
+          if (import.meta.env.DEV) console.log(error);
+        }
       },
     }),
   }),
