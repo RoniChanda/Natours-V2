@@ -33,7 +33,7 @@ export default function MyReviews() {
     content = <Loader />;
   } else if (data) {
     const bookings = data.data.bookings;
-    console.log(bookings);
+
     const tourStatus = bookings.map((el) => {
       const tourOver = getTourStatus(el);
       return tourOver ? "yes" : "no";

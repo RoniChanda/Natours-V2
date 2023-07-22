@@ -4,6 +4,7 @@ import customFetchBase from "../customFetchBase";
 import { bookingApi } from "./bookingApi";
 import { userApi } from "./userApi";
 import { tourApi } from "./tourApi";
+import { isLoggedOut } from "../slices/userSlice";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -60,6 +61,7 @@ export const authApi = createApi({
         try {
           await obj.queryFulfilled;
           obj.dispatch(userApi.util.resetApiState());
+          obj.dispatch(isLoggedOut());
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
         } catch (error) {
           if (import.meta.env.DEV) console.error("Error:", error);
