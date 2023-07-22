@@ -39,7 +39,7 @@ export default function DeleteAccount() {
     if (isSuccess) {
       dispatch(isLoggedOut());
       dispatch(
-        setAlert({ type: "success", msg: `Your account was ${activity}d` })
+        setAlert({ type: "success", msg: `Your account was ${activity}d.` })
       );
       navigate("/");
     }

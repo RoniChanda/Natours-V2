@@ -33,21 +33,9 @@ exports.sendTokensAndCookies = async (
   const accessToken = await createTokensAndCookies(user, res);
 
   if (user.provider === "local") {
-    // data not sent to frontend
-    user.password = undefined;
-    user.passwordChangedAt = undefined;
-    user.twoFactorSecret = undefined;
-    user.refreshTokens = undefined;
-    user.verificationCode = undefined;
-    user.verificationCodeExpires = undefined;
-    user.verificationCodeChecked = undefined;
-
     res.status(statusCode).json({
       status: "SUCCESS",
       accessToken,
-      data: {
-        user,
-      },
     });
   } else {
     res.redirect(`${process.env.FRONTEND_URL}${redirectUrl}?status=success`);

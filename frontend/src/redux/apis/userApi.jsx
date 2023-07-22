@@ -82,6 +82,8 @@ export const userApi = createApi({
     //* Get all users **********************************************
     getAllUsers: builder.query({
       providesTags: (result) => {
+        if (!result) return [];
+
         const tags = result.data.users.map((el) => ({
           type: "user",
           id: el._id,

@@ -1,11 +1,11 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import customFetchBase from "../customFetchBase";
-import { getUser, isLoggedOut } from "../slices/userSlice";
 import { bookingApi } from "./bookingApi";
 import { userApi } from "./userApi";
 import { logError } from "../../utils/logError";
 import { tourApi } from "./tourApi";
+import { isLoggedOut } from "../slices/userSlice";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -21,8 +21,8 @@ export const authApi = createApi({
 
       async onQueryStarted(args, obj) {
         logError(obj, async () => {
-          const { data } = await obj.queryFulfilled;
-          if (data.data?.user) obj.dispatch(getUser(data.data.user));
+          await obj.queryFulfilled;
+          obj.dispatch(userApi.util.invalidateTags(["me"]));
           obj.dispatch(bookingApi.util.resetApiState());
         });
       },
@@ -38,8 +38,8 @@ export const authApi = createApi({
 
       async onQueryStarted(args, obj) {
         logError(obj, async () => {
-          const { data } = await obj.queryFulfilled;
-          if (data.data?.user) obj.dispatch(getUser(data.data.user));
+          await obj.queryFulfilled;
+          obj.dispatch(userApi.util.invalidateTags(["me"]));
           obj.dispatch(bookingApi.util.resetApiState());
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
         });
@@ -150,8 +150,8 @@ export const authApi = createApi({
 
       async onQueryStarted(args, obj) {
         logError(obj, async () => {
-          const { data } = await obj.queryFulfilled;
-          if (data.data?.user) obj.dispatch(getUser(data.data.user));
+          await obj.queryFulfilled;
+          obj.dispatch(userApi.util.invalidateTags(["me"]));
           obj.dispatch(bookingApi.util.resetApiState());
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
         });
@@ -177,8 +177,8 @@ export const authApi = createApi({
 
       async onQueryStarted(args, obj) {
         logError(obj, async () => {
-          const { data } = await obj.queryFulfilled;
-          if (data.data?.user) obj.dispatch(getUser(data.data.user));
+          await obj.queryFulfilled;
+          obj.dispatch(userApi.util.invalidateTags(["me"]));
           obj.dispatch(bookingApi.util.resetApiState());
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
         });
