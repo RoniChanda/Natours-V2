@@ -23,7 +23,7 @@ export const authApi = createApi({
           obj.dispatch(userApi.util.invalidateTags(["me"]));
           obj.dispatch(bookingApi.util.resetApiState());
         } catch (error) {
-          if (import.meta.env.DEV) console.log(error);
+          if (import.meta.env.DEV) console.error("Error:", error);
         }
       },
     }),
@@ -43,7 +43,7 @@ export const authApi = createApi({
           obj.dispatch(bookingApi.util.resetApiState());
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
         } catch (error) {
-          if (import.meta.env.DEV) console.log(error);
+          if (import.meta.env.DEV) console.error("Error:", error);
         }
       },
     }),
@@ -62,7 +62,7 @@ export const authApi = createApi({
           obj.dispatch(userApi.util.resetApiState());
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
         } catch (error) {
-          if (import.meta.env.DEV) console.log(error);
+          if (import.meta.env.DEV) console.error("Error:", error);
         }
       },
     }),
@@ -125,7 +125,7 @@ export const authApi = createApi({
           await obj.queryFulfilled;
           obj.dispatch(userApi.util.invalidateTags(["me"]));
         } catch (error) {
-          if (import.meta.env.DEV) console.log(error);
+          if (import.meta.env.DEV) console.error("Error:", error);
         }
       },
     }),
@@ -143,7 +143,7 @@ export const authApi = createApi({
           await obj.queryFulfilled;
           obj.dispatch(userApi.util.invalidateTags(["me"]));
         } catch (error) {
-          if (import.meta.env.DEV) console.log(error);
+          if (import.meta.env.DEV) console.error("Error:", error);
         }
       },
     }),
@@ -163,7 +163,7 @@ export const authApi = createApi({
           obj.dispatch(bookingApi.util.resetApiState());
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
         } catch (error) {
-          if (import.meta.env.DEV) console.log(error);
+          if (import.meta.env.DEV) console.error("Error:", error);
         }
       },
     }),
@@ -192,7 +192,7 @@ export const authApi = createApi({
           obj.dispatch(bookingApi.util.resetApiState());
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
         } catch (error) {
-          if (import.meta.env.DEV) console.log(error);
+          if (import.meta.env.DEV) console.error("Error:", error);
         }
       },
     }),

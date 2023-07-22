@@ -20,7 +20,7 @@ export const userApi = createApi({
           const { data } = await obj.queryFulfilled;
           obj.dispatch(getUser(data.data.user));
         } catch (error) {
-          if (import.meta.env.DEV) console.log(error);
+          if (import.meta.env.DEV) console.error("Error:", error);
         }
       },
     }),

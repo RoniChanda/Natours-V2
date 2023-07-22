@@ -33,7 +33,7 @@ export const reviewApi = createApi({
           obj.dispatch(tourApi.util.invalidateTags(["tours"]));
           obj.dispatch(bookingApi.util.invalidateTags(["userBookings"]));
         } catch (error) {
-          if (import.meta.env.DEV) console.log(error);
+          if (import.meta.env.DEV) console.error("Error:", error);
         }
       },
     }),
@@ -52,7 +52,7 @@ export const reviewApi = createApi({
           obj.dispatch(tourApi.util.invalidateTags(["tours"]));
           obj.dispatch(bookingApi.util.invalidateTags(["userBookings"]));
         } catch (error) {
-          if (import.meta.env.DEV) console.log(error);
+          if (import.meta.env.DEV) console.error("Error:", error);
         }
       },
     }),
@@ -70,7 +70,7 @@ export const reviewApi = createApi({
           await obj.queryFulfilled;
           obj.dispatch(tourApi.util.invalidateTags(["tourReviews"]));
         } catch (error) {
-          if (import.meta.env.DEV) console.log(error);
+          if (import.meta.env.DEV) console.error("Error:", error);
         }
       },
     }),

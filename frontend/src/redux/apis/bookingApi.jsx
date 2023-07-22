@@ -50,7 +50,7 @@ export const bookingApi = createApi({
           await obj.queryFulfilled;
           obj.dispatch(tourApi.util.invalidateTags(["tours"]));
         } catch (error) {
-          if (import.meta.env.DEV) console.log(error);
+          if (import.meta.env.DEV) console.error("Error:", error);
         }
       },
     }),
