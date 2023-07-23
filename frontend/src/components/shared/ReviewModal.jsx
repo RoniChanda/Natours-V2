@@ -75,7 +75,7 @@ export default function ReviewModal({
 
   return (
     <Fragment>
-      <ModalContainer>
+      <ModalContainer onCancel={onCancel}>
         <InnerContainer
           className="form-modal"
           heading={`${reviewObj ? "Update" : "Write"} Review`}
