@@ -64,7 +64,7 @@ exports.createAndSendVerificationCode = async (
   try {
     // send token to user's mail/phone
     if (medium === "email" && type === "link") {
-      const resetURL = `${process.env.FRONTEND_URL}/passwordReset/${resetCode}`;
+      const resetURL = `${process.env.FRONTEND_URL}/auth/passwordReset/${resetCode}`;
       await new Email(user, resetURL).sendPasswordReset();
     } else if (medium === "email" && type === "code") {
       await new Email(user, resetCode).sendVerificationCode();

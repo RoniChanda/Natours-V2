@@ -48,8 +48,10 @@ export default function DetailsForm({ name, email, userPhone, photo, userId }) {
   useEffect(() => {
     if (error) dispatch(setAlert({ type: "error", msg: error }));
 
-    if (data?.status === "SUCCESS")
+    if (data?.status === "SUCCESS") {
       dispatch(setAlert({ type: "success", msg: "Details was updated." }));
+      setPhotoName("");
+    }
   }, [error, dispatch, data]);
 
   const inputHandler = (e) => {

@@ -25,8 +25,11 @@ export default function Error({ customError }) {
       </div>
       <div className="error__msg">{errorContent}</div>
 
-      <Link to={-1 || "/"} className="btn btn--green btn--small">
-        Go back
+      <Link
+        to={error.status === 403 ? -1 || "/" : "/"}
+        className="btn btn--green btn--small"
+      >
+        {error.status === 403 ? "Go back" : "Go to Home"}
       </Link>
     </div>
   );
