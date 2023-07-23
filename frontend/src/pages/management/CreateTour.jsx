@@ -8,7 +8,6 @@ import TourDetailsInputs from "../../components/management-details/TourDetailsIn
 import TourStartDatesInputs from "../../components/management-details/TourStartDatesInputs";
 import TourStartLocationInputs from "../../components/management-details/TourStartLocationInputs";
 import TourLocationsInputs from "../../components/management-details/TourLocationsInputs";
-import TourImages from "../../components/management-details/TourImages";
 import { useCreateTourMutation } from "../../redux/apis/tourApi";
 import TourGuidesInputs from "../../components/management-details/TourGuidesInputs";
 import Meta from "../../components/ui/Meta";
@@ -25,7 +24,6 @@ export default function CreateTour() {
     priceDiscount: "",
     summary: "",
     description: "",
-    imageCover: "",
   });
   const [startDates, setStartDates] = useState([]);
   const [startLocation, setStartLocation] = useState({
@@ -35,7 +33,6 @@ export default function CreateTour() {
     startLocAddress: "",
   });
   const [locations, setLocations] = useState([]);
-  const [images, setImages] = useState([]);
   const [leadGuide, setLeadGuide] = useState("");
   const [tourGuides, setTourGuides] = useState([]);
   const navigate = useNavigate();
@@ -61,15 +58,13 @@ export default function CreateTour() {
     };
     const guides = [leadGuide, ...tourGuides];
 
-    const form = new FormData();
-    Object.keys(tourData).forEach((el) => form.append(el, tourData[el]));
-    form.append("startLocation", JSON.stringify(newStartLocation));
-    images.forEach((el) => form.append(`images`, el));
-    startDates.forEach((el) => form.append("startDates[]", JSON.stringify(el)));
-    locations.forEach((el) => form.append("locations[]", JSON.stringify(el)));
-    guides.forEach((el) => form.append("guides[]", el));
-
-    createTour(form);
+    createTour({
+      ...tourData,
+      startDates,
+      startLocation: newStartLocation,
+      locations,
+      guides,
+    });
   };
 
   return (
@@ -109,14 +104,6 @@ export default function CreateTour() {
             setLeadGuide={setLeadGuide}
             tourGuides={tourGuides}
             setTourGuides={setTourGuides}
-          />
-          <div className="line span-all-columns line-small">&nbsp;</div>
-          {/* Images */}
-          <TourImages
-            tourData={tourData}
-            setTourData={setTourData}
-            images={images}
-            setImages={setImages}
           />
 
           <div className="form__group right span-all-columns">

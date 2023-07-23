@@ -37,9 +37,6 @@ router
   .post(
     authMiddlewares.protect,
     authMiddlewares.restrictTo("admin", "lead-guide"),
-    uploadMiddlewares.uploadTourPhotos,
-    uploadMiddlewares.resizeTourPhotos,
-    tourControllers.parseData,
     tourControllers.createTour
   );
 

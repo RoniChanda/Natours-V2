@@ -122,6 +122,14 @@ export default function EditTour() {
   } else if (fetchData) {
     content = (
       <form className="form-create-tour" onSubmit={submitHandler}>
+        {/* Images */}
+        <TourImages
+          tourData={tourData}
+          setTourData={setTourData}
+          images={images}
+          setImages={setImages}
+        />
+        <div className="line span-all-columns line-small">&nbsp;</div>
         <TourDetailsInputs tourData={tourData} setTourData={setTourData} />
         <div className="line span-all-columns line-small">&nbsp;</div>
         {/* Start Dates */}
@@ -148,14 +156,6 @@ export default function EditTour() {
           setLeadGuide={setLeadGuide}
           tourGuides={tourGuides}
           setTourGuides={setTourGuides}
-        />
-        <div className="line span-all-columns line-small">&nbsp;</div>
-        {/* Images */}
-        <TourImages
-          tourData={tourData}
-          setTourData={setTourData}
-          images={images}
-          setImages={setImages}
         />
 
         <div className="form__group right span-all-columns">

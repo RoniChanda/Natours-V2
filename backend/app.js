@@ -33,7 +33,7 @@ app.use(
     credentials: true,
   })
 );
-// app.options("*", cors());
+app.options("*", cors());
 
 // set security HTTP headers
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -63,7 +63,7 @@ app.post(
 );
 
 // Body parser
-app.use(express.json({ limit: "20kb" }));
+app.use(express.json({ limit: "10kb" }));
 
 // passport
 app.use(passport.initialize());
