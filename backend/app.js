@@ -33,7 +33,7 @@ app.use(
     credentials: true,
   })
 );
-app.options("*", cors());
+// app.options("*", cors());
 
 // set security HTTP headers
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
