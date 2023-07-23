@@ -29,7 +29,7 @@ export default function Error({ customError }) {
         to={error.status === 403 ? -1 || "/" : "/"}
         className="btn btn--green btn--small"
       >
-        {error.status === 403 ? "Go back" : "Go to Home"}
+        {error.status === 403 ? "Go back" : "Home"}
       </Link>
     </div>
   );

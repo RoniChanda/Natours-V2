@@ -68,17 +68,29 @@ exports.restrictTo =
 //* User Verification Check ****************************************
 
 exports.verified = (req, res, next) => {
-  if (!req.user.emailVerified || (req.user.phone && !req.user.phoneVerified)) {
+  // phone verification is not checked as twilio is in trial mode
+  if (!req.user.emailVerified) {
     return next(
-      new AppError(
-        "Please verify your both email and phone to perform this action!",
-        403
-      )
+      new AppError("Please verify your email to perform this action!", 403)
     );
   }
 
   next();
 };
+
+// exports.verified = (req, res, next) => {
+//   // both email and phone verification is checked
+//   if (!req.user.emailVerified || (req.user.phone && !req.user.phoneVerified)) {
+//     return next(
+//       new AppError(
+//         "Please verify your both email and phone to perform this action!",
+//         403
+//       )
+//     );
+//   }
+
+//   next();
+// };
 
 //* Local provider check *******************************************
 
