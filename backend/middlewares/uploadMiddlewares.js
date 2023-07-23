@@ -83,42 +83,49 @@ exports.uploadTourPhotos = upload.fields([
 //* Resize tour photos *********************************************
 
 exports.resizeTourPhotos = catchAsync(async (req, res, next) => {
-  if (!req.files?.imageCover || !req.files?.images) return next();
+  if (!req.files) return next();
 
   // Cover Image resizing
-  const resizedImageCoverBuffer = await sharp(req.files.imageCover[0].buffer)
-    .resize(2000, 1333)
-    .toFormat("jpeg")
-    .jpeg({ quality: 90 })
-    .toBuffer();
+  if (req.files.imageCover) {
+    const resizedImageCoverBuffer = await sharp(req.files.imageCover[0].buffer)
+      .resize(2000, 1333)
+      .toFormat("jpeg")
+      .jpeg({ quality: 90 })
+      .toBuffer();
 
-  req.body.imageCover = await cloudinaryUpload(
-    resizedImageCoverBuffer,
-    `tour-${req.params.id}-${Date.now()}-cover`,
-    next,
-    "tours"
-  );
+    req.body.imageCover = await cloudinaryUpload(
+      resizedImageCoverBuffer,
+      `tour-${req.params.id}-${Date.now()}-cover`,
+      next,
+      "tours"
+    );
+  }
 
   // Tour images resizing
-  req.body.images = [];
-  await Promise.all(
-    req.files.images.map(async (file, index) => {
-      const image = await sharp(file.buffer)
-        .resize(2000, 1333)
-        .toFormat("jpeg")
-        .jpeg({ quality: 90 })
-        .toBuffer();
+  if (req.files.images) {
+    if (!req.body.images) req.body.images = [];
+    if (typeof req.body.images === "string")
+      req.body.images = [req.body.images];
 
-      req.body.images.push(
-        await cloudinaryUpload(
-          image,
-          `tour-${req.params.id}-${Date.now()}-${index + 1}`,
-          next,
-          "tours"
-        )
-      );
-    })
-  );
+    await Promise.all(
+      req.files.images.map(async (file, index) => {
+        const image = await sharp(file.buffer)
+          .resize(2000, 1333)
+          .toFormat("jpeg")
+          .jpeg({ quality: 90 })
+          .toBuffer();
+
+        req.body.images.push(
+          await cloudinaryUpload(
+            image,
+            `tour-${req.params.id}-${Date.now()}-${index + 1}`,
+            next,
+            "tours"
+          )
+        );
+      })
+    );
+  }
 
   next();
 });

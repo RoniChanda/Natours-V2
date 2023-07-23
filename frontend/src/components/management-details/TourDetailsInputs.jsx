@@ -69,7 +69,7 @@ export default function TourDetailsInputs({ setTourData, tourData }) {
         type="number"
         placeholder="Discount ($)"
         onChange={tourDataHandler}
-        value={tourData.priceDiscount}
+        value={tourData.priceDiscount || ""}
       />
       <Input
         groupClass="span-all-columns"

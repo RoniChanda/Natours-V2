@@ -108,7 +108,7 @@ export default function EditTour() {
     const form = new FormData();
     Object.keys(tourData).forEach((el) => form.append(el, tourData[el]));
     form.append("startLocation", JSON.stringify(newStartLocation));
-    images.forEach((el) => form.append(`images`, el));
+    images.forEach((el) => form.append("images", el));
     startDates.forEach((el) => form.append("startDates", JSON.stringify(el)));
     locations.forEach((el) => form.append("locations", JSON.stringify(el)));
     guides.forEach((el) => form.append("guides", el));
