@@ -63,7 +63,7 @@ app.post(
 );
 
 // Body parser
-app.use(express.json());
+app.use(express.json({ limit: "10kb" }));
 
 // passport
 app.use(passport.initialize());
