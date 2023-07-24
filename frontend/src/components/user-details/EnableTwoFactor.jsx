@@ -89,7 +89,7 @@ export default function EnableTwoFactor() {
       </div>
 
       <p className="title__description ma-t-lg">
-        * User need both email and phone to be verified to setup 2FA
+        * User need email to be verified to setup 2FA
       </p>
     </InnerContainer>
   );

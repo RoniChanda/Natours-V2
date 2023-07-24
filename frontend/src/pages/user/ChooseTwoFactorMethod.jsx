@@ -65,7 +65,7 @@ export default function ChooseTwoFactorMethod() {
           Get Verification <span className="bold">code</span> in email
         </BtnChooseMethod>
         <div className="form__link">
-          <Link className="btn-secondary" to="/auth/twoFactor/AuthApp">
+          <Link className="btn-secondary" to={-1}>
             Go back
           </Link>
         </div>
