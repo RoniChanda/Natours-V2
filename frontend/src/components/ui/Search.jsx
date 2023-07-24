@@ -7,25 +7,28 @@ export default function Search() {
   const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
 
-  const searchHandler = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
     navigate(`/?search=${keyword}`);
     setKeyword("");
   };
 
   return (
     <div className="nav__search">
-      <button type="button" className="nav__search-btn" onClick={searchHandler}>
-        <svg>
-          <use xlinkHref="/img/icons.svg#icon-search"></use>
-        </svg>
-      </button>
-      <input
-        type="text"
-        placeholder="Search tours"
-        className="nav__search-input"
-        onChange={(e) => setKeyword(e.target.value)}
-        value={keyword}
-      />
+      <form onSubmit={submitHandler}>
+        <button type="submit" className="nav__search-btn">
+          <svg>
+            <use xlinkHref="/img/icons.svg#icon-search"></use>
+          </svg>
+        </button>
+        <input
+          type="text"
+          placeholder="Search tours"
+          className="nav__search-input"
+          onChange={(e) => setKeyword(e.target.value)}
+          value={keyword}
+        />
+      </form>
     </div>
   );
 }
