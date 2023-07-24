@@ -24,7 +24,7 @@ export default function Login() {
   useEffect(() => {
     if (error) dispatch(setAlert({ type: "error", msg: error }));
 
-    if (data?.status === "SUCCESS") {
+    if (data?.status === "SUCCESS" && !data?.userId) {
       dispatch(setAlert({ type: "success", msg: `Welcome to Natours!` }));
       navigate(redirect);
     }
@@ -53,7 +53,6 @@ export default function Login() {
         title="Login | Natours"
         description="Login to Natours with local and third-party providers"
       />
-      {/* {error && <Alert type="error" msg={error.data?.message || error.error} />} */}
       <InnerContainer className="login-form" heading="Log into your account">
         <form onSubmit={submitHandler}>
           <Input
