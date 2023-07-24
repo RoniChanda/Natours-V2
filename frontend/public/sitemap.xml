@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>https://natours-mern-v2.netlify.app/</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/tours/64bd36868b4c62a9cb577d8b</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/tours/5c88fa8cf4afda39709c2951</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/tours/5c88fa8cf4afda39709c2955</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/tours/5c88fa8cf4afda39709c295a</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/tours/5c88fa8cf4afda39709c295d</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/tours/5c88fa8cf4afda39709c2961</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/tours/5c88fa8cf4afda39709c2966</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/tours/5c88fa8cf4afda39709c296c</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/tours/5c88fa8cf4afda39709c2970</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/tours/5c88fa8cf4afda39709c2974</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/verifyCode</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/auth/signup</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/auth/login</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/auth/twoFactor/authApp</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/auth/twoFactor/chooseMethod</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>0.8</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/auth/forgotPassword</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/me/profile</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/me/profile/update</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/me/security</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/me/bookings</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/me/reviews</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/manage/tours</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/manage/users</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/manage/bookings</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://natours-mern-v2.netlify.app/manage/reviews</loc>
+	<lastmod>2023-07-24T17:27:20+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+</urlset>
