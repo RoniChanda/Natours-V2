@@ -8,9 +8,11 @@ import ReviewModal from "../shared/ReviewModal";
 import { useDeleteReviewMutation } from "../../redux/apis/reviewApi";
 import { setAlert } from "../../redux/slices/userSlice";
 import "./ReviewItem.css";
+import Modal from "../ui/Modal";
 
 export default function ReviewItem({ booking }) {
   const [reviewModal, setReviewModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
   const [readMore, setReadMore] = useState(false);
   const dispatch = useDispatch();
   const [deleteReview, { isLoading, error, isSuccess }] =
@@ -34,6 +36,17 @@ export default function ReviewItem({ booking }) {
 
   return (
     <Fragment>
+      {deleteModal && (
+        <Modal
+          headerClass="heading-warning"
+          heading="Delete review"
+          message={<>Do you want to delete this review?</>}
+          onCancel={() => setDeleteModal(false)}
+          onProceed={() => deleteReview(booking.review[0]._id)}
+          isLoading={isLoading}
+        />
+      )}
+
       {reviewModal && (
         <ReviewModal
           bookingId={booking._id}
@@ -79,9 +92,9 @@ export default function ReviewItem({ booking }) {
             <button
               type="button"
               className="btn-secondary secondary--red"
-              onClick={() => deleteReview(booking.review[0]._id)}
+              onClick={() => setDeleteModal(true)}
             >
-              {isLoading ? "Loading..." : "Delete Review"}
+              Delete Review
             </button>
           )}
         </div>
