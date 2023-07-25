@@ -47,4 +47,6 @@ Visit the link -> https://natours-mern-v2.netlify.app/
 ### Invoice and Receipt page
 ![nat-7](https://github.com/RoniChanda/Natours-V2/assets/86836682/7273fbfe-c403-45fb-b288-0a0857dcc719)
 ### User Reviews page
-
+![nat-8](https://github.com/RoniChanda/Natours-V2/assets/86836682/d8444071-91dc-4344-a884-9217552fbeb1)
+### Create/Update Review modal
+![natours-9](https://github.com/RoniChanda/Natours-V2/assets/86836682/bb08d339-eae1-4a79-9eeb-a6bdca8dcaae)
