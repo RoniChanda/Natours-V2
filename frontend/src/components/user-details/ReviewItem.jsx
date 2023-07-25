@@ -31,6 +31,7 @@ export default function ReviewItem({ booking }) {
           msg: "Your review was deleted.",
         })
       );
+      setDeleteModal(false);
     }
   }, [error, dispatch, isSuccess]);
 

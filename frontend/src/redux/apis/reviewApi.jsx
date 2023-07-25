@@ -31,7 +31,7 @@ export const reviewApi = createApi({
         try {
           await obj.queryFulfilled;
           obj.dispatch(tourApi.util.invalidateTags(["tours"]));
-          obj.dispatch(bookingApi.util.invalidateTags(["userBookings"]));
+          obj.dispatch(bookingApi.util.invalidateTags(["myBookings"]));
         } catch (error) {
           if (import.meta.env.DEV) console.error("Error:", error);
         }
@@ -50,7 +50,7 @@ export const reviewApi = createApi({
         try {
           await obj.queryFulfilled;
           obj.dispatch(tourApi.util.invalidateTags(["tours"]));
-          obj.dispatch(bookingApi.util.invalidateTags(["userBookings"]));
+          obj.dispatch(bookingApi.util.invalidateTags(["myBookings"]));
         } catch (error) {
           if (import.meta.env.DEV) console.error("Error:", error);
         }
