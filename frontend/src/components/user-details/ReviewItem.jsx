@@ -7,8 +7,8 @@ import IconRating from "../ui/IconRating";
 import ReviewModal from "../shared/ReviewModal";
 import { useDeleteReviewMutation } from "../../redux/apis/reviewApi";
 import { setAlert } from "../../redux/slices/userSlice";
-import "./ReviewItem.css";
 import Modal from "../ui/Modal";
+import "./ReviewItem.css";
 
 export default function ReviewItem({ booking }) {
   const [reviewModal, setReviewModal] = useState(false);
