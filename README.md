@@ -29,8 +29,22 @@ Visit the link -> https://natours-mern-v2.netlify.app/
 6. Sort, filter, pagination, and search box functionality
 ## Screenshots
 ### Overview page
-
-
 https://github.com/RoniChanda/Natours-V2/assets/86836682/a5fec0d9-9740-4768-8958-c72285cb104d
+### Tour Details page
+https://github.com/RoniChanda/Natours-V2/assets/86836682/493e556e-cf07-4963-aa11-db002b9a4b07
+### Login / Signup / Account Recovery pages
+https://github.com/RoniChanda/Natours-V2/assets/86836682/f97dd8db-a5e2-4757-a193-c9e8a8ae0ece
+### Profile and Security pages
+https://github.com/RoniChanda/Natours-V2/assets/86836682/ad2409ae-5fb8-4902-8014-a2a39460add5
+### Tour Booking
+https://github.com/RoniChanda/Natours-V2/assets/86836682/2bd4a5c7-9927-4418-b58f-476b46548f37
+### User Reviews page
+https://github.com/RoniChanda/Natours-V2/assets/86836682/7cf95667-11c4-4777-80a1-4ddf4e08efec
+
+
+
+
+
+
 
 
