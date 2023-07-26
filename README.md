@@ -3,12 +3,12 @@
 This is the modified version of *Jonas Schmedtmann's* Natours using **MERN** stack (React frontend and Node backend).
 ## Live Website
 Visit the link -> https://natours-mern-v2.netlify.app/
-## Features of Original Version
+## Some notable features of the Original Version
 1. Authentication using email & password, jwt cookie
 2. Marking the locations of tours on the map
 3. Forgot/Reset password using reset link in email
 4. Payment method using Stripe
-5. Update user details/password
+5. Update user details/password 
 ## Newly added features
 1. Authentication ->
    - Login with Google provider
@@ -44,11 +44,13 @@ https://github.com/RoniChanda/Natours-V2/assets/86836682/8470a355-d63c-44ad-8fc2
 https://github.com/RoniChanda/Natours-V2/assets/86836682/d1eb383f-e832-45a7-ad34-0bc08d970ecf
 ### Manage Users/Reviews/Bookings pages
 https://github.com/RoniChanda/Natours-V2/assets/86836682/d6deca19-ed2c-43b4-b2a9-bdfb8775f91b
-## Built with
+### Two-Factor Login pages
+https://github.com/RoniChanda/Natours-V2/assets/86836682/cc5c974e-937f-42b7-bef6-d3e8612c26f4
+## Tools used
 1. Frontend- [Vite](https://vitejs.dev/guide/)/[React](https://react.dev/), Backend- [Node](https://nodejs.org/en)/[Express](https://expressjs.com/), Database- [MongoDB](https://www.mongodb.com/)/[Mongoose](https://mongoosejs.com/)
 2. Store- [Redux Toolkit Query](https://redux-toolkit.js.org/rtk-query/overview)
 3. Payment- [Stripe](https://stripe.com/en-in)
-4. Mail- [MailTrap](https://mailtrap.io/) (Development) & [Brevo](https://app.brevo.com/) (Production) [Free version]
+4. Mail- [Nodemailer](https://github.com/nodemailer/nodemailer), [MailTrap](https://mailtrap.io/) (Development) & [Brevo](https://app.brevo.com/) (Production) [Free version]
 5. SMS- [Twilio](https://www.twilio.com/en-us) [Free version]
 6. Image Upload- [multer](https://github.com/expressjs/multer), [sharp](https://github.com/lovell/sharp) and [Cloudinary](https://cloudinary.com/)
 7. Google Login- [passport](https://www.passportjs.org/)
@@ -58,8 +60,15 @@ https://github.com/RoniChanda/Natours-V2/assets/86836682/d6deca19-ed2c-43b4-b2a9
 ## Issues in this website
 1. Twilio is in the free version. So sending sms to an unverified number is not possible.
 2. Vercel has a payload limit of 4.5MB; hence, an error will occur if the total size of the submitted file exceeds 4.5 MB. Better use images of fewer sizes.
-
+   
 If you find any other notable issues please get in touch with me at suprachanda97@gmail.com
+## Future Ideas
+1. To make this website mobile responsive
+2. To add a carousel of top tours on the overview page
+3. To Add a dashboard of tours about tour stats and monthly plans for admin, guide, and lead-guide
+4. To Add the functionality of finding tours using coordinates and distances
+5. To Add functionality of changing roles to admin, guide or lead-guide
+
 
 
 
