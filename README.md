@@ -39,7 +39,10 @@ https://github.com/RoniChanda/Natours-V2/assets/86836682/ad2409ae-5fb8-4902-8014
 ### Tour Booking
 https://github.com/RoniChanda/Natours-V2/assets/86836682/2bd4a5c7-9927-4418-b58f-476b46548f37
 ### User Reviews page
-https://github.com/RoniChanda/Natours-V2/assets/86836682/7cf95667-11c4-4777-80a1-4ddf4e08efec
+
+https://github.com/RoniChanda/Natours-V2/assets/86836682/be489bd1-0e0d-4e11-b921-8700574481db
+
+
 
 
 
