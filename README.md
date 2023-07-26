@@ -27,25 +27,39 @@ Visit the link -> https://natours-mern-v2.netlify.app/
    - Feedback (like/unlike) for each review
 5. Manage users, tours, reviews, and bookings
 6. Sort, filter, pagination, and search box functionality
-## Screenshots
+## Videos
 ### Overview page
-https://github.com/RoniChanda/Natours-V2/assets/86836682/a5fec0d9-9740-4768-8958-c72285cb104d
+https://github.com/RoniChanda/Natours-V2/assets/86836682/75f963cc-54d4-4430-9682-5155f075eca5
 ### Tour Details page
-https://github.com/RoniChanda/Natours-V2/assets/86836682/493e556e-cf07-4963-aa11-db002b9a4b07
+https://github.com/RoniChanda/Natours-V2/assets/86836682/d0b5e7c0-d56b-4250-89a3-81c35563ddf9
 ### Login / Signup / Account Recovery pages
-https://github.com/RoniChanda/Natours-V2/assets/86836682/f97dd8db-a5e2-4757-a193-c9e8a8ae0ece
+https://github.com/RoniChanda/Natours-V2/assets/86836682/76316f08-0408-44b4-8cd3-aed7c2e5f614
 ### Profile and Security pages
-https://github.com/RoniChanda/Natours-V2/assets/86836682/ad2409ae-5fb8-4902-8014-a2a39460add5
+https://github.com/RoniChanda/Natours-V2/assets/86836682/5c01dcf8-65b2-4dc9-9606-dc238069626f
 ### Tour Booking
-https://github.com/RoniChanda/Natours-V2/assets/86836682/2bd4a5c7-9927-4418-b58f-476b46548f37
+https://github.com/RoniChanda/Natours-V2/assets/86836682/9d746e20-858b-4171-9d10-7dab004571a2
 ### User Reviews page
+https://github.com/RoniChanda/Natours-V2/assets/86836682/8470a355-d63c-44ad-8fc2-4c20b9517df8
+### Manage Tours page
+https://github.com/RoniChanda/Natours-V2/assets/86836682/d1eb383f-e832-45a7-ad34-0bc08d970ecf
+### Manage Users/Reviews/Bookings pages
+https://github.com/RoniChanda/Natours-V2/assets/86836682/d6deca19-ed2c-43b4-b2a9-bdfb8775f91b
+## Built with
+1. Frontend- [Vite](https://vitejs.dev/guide/)/[React](https://react.dev/), Backend- [Node](https://nodejs.org/en)/[Express](https://expressjs.com/), Database- [MongoDB](https://www.mongodb.com/)/[Mongoose](https://mongoosejs.com/)
+2. Store- [Redux Toolkit Query](https://redux-toolkit.js.org/rtk-query/overview)
+3. Payment- [Stripe](https://stripe.com/en-in)
+4. Mail- [MailTrap](https://mailtrap.io/) (Development) & [Brevo](https://app.brevo.com/) (Production) [Free version]
+5. SMS- [Twilio](https://www.twilio.com/en-us) [Free version]
+6. Image Upload- [multer](https://github.com/expressjs/multer), [sharp](https://github.com/lovell/sharp) and [Cloudinary](https://cloudinary.com/)
+7. Google Login- [passport](https://www.passportjs.org/)
+8. Two-Factor Authentication- [otplib](https://github.com/yeojz/otplib), [qrcode](https://github.com/soldair/node-qrcode)
+9. Map- [Mapbox](https://www.mapbox.com/)
+10. Frontend deployed in [Netlify](https://www.netlify.com/) and Backend deployed in [Vercel](https://vercel.com/)
+## Issues in this website
+1. Twilio is in the free version. So sending sms to an unverified number is not possible.
+2. Vercel has a payload limit of 4.5MB; hence, an error will occur if the total size of the submitted file exceeds 4.5 MB. Better use images of fewer sizes.
 
-https://github.com/RoniChanda/Natours-V2/assets/86836682/be489bd1-0e0d-4e11-b921-8700574481db
-
-
-
-
-
+If you find any other notable issues please get in touch with me at suprachanda97@gmail.com
 
 
 
