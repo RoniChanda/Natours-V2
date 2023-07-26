@@ -69,7 +69,7 @@ If you find any other notable issues please get in touch with me at suprachanda9
 4. To Add the functionality of finding tours using coordinates and distances
 5. To Add functionality of changing roles to admin, guide or lead-guide
 
-### Thankyou for visiting!
+### Thank you for visiting!
 
 
 
