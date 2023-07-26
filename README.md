@@ -29,22 +29,8 @@ Visit the link -> https://natours-mern-v2.netlify.app/
 6. Sort, filter, pagination, and search box functionality
 ## Screenshots
 ### Overview page
-![nat-1](https://github.com/RoniChanda/Natours-V2/assets/86836682/cf1dcac9-03c1-41fb-abb3-69ad69ddc924)
-### Tour Review Modal
-![natours-6](https://github.com/RoniChanda/Natours-V2/assets/86836682/d2cfdec1-b48c-4568-880e-6312c849c8ac)
-### Login page
-![natours-7](https://github.com/RoniChanda/Natours-V2/assets/86836682/3e608568-ed10-4c30-9d8c-ed03ea5086b9)
-### Account recovery page
-![natours-8](https://github.com/RoniChanda/Natours-V2/assets/86836682/32d12692-f6c6-451a-b7db-daa821802c03)
-### Profile page
-![nat-2](https://github.com/RoniChanda/Natours-V2/assets/86836682/edffbcd9-d258-4e87-913e-128980d488e9)
-### Security page
-![nat-3](https://github.com/RoniChanda/Natours-V2/assets/86836682/a67634ca-28ac-4db7-9d07-1ecfa3402433)
-### Two-factor setup Modal
-![nat-4](https://github.com/RoniChanda/Natours-V2/assets/86836682/b04ea3ae-b296-4e6f-94f5-f599bf5f296f)
-### User Bookings page
-![nat-6](https://github.com/RoniChanda/Natours-V2/assets/86836682/4bd05023-878d-4990-89e0-4bcd3c07dc1b)
-### Invoice and Receipt page
-![nat-7](https://github.com/RoniChanda/Natours-V2/assets/86836682/7273fbfe-c403-45fb-b288-0a0857dcc719)
-### User Reviews page
+
+
+https://github.com/RoniChanda/Natours-V2/assets/86836682/a5fec0d9-9740-4768-8958-c72285cb104d
+
 
